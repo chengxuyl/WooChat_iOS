@@ -1,5 +1,5 @@
 {
-  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "1ea843f7-ba9c-8149-9ebc-3ac108d5dc0b++2479+++5734202",
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "115D6199A17EECA7FD5868EE4AA44DF2706A2FE1+++C12052E",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
     "1ea843f7-ba9c-8149-9ebc-3ac108d5dc0b++2479+++3E4FD47" : {
 
@@ -7,30 +7,37 @@
     "1ea843f7-ba9c-8149-9ebc-3ac108d5dc0b++2479+++5734202" : {
 
     },
-    "1ea843f7-ba9c-8149-9ebc-3ac108d5dc0b++3738+++4A42BCF" : {
+    "1ea843f7-ba9c-8149-9ebc-3ac108d5dc0b++2630+++7AE1893" : {
 
     },
-    "1ea843f7-ba9c-8149-9ebc-3ac108d5dc0b++2630+++7AE1893" : {
+    "1ea843f7-ba9c-8149-9ebc-3ac108d5dc0b++3738+++4A42BCF" : {
 
     }
   },
   "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
     "1ea843f7-ba9c-8149-9ebc-3ac108d5dc0b++2479+++3E4FD47" : 0,
     "1ea843f7-ba9c-8149-9ebc-3ac108d5dc0b++2479+++5734202" : 0,
-    "1ea843f7-ba9c-8149-9ebc-3ac108d5dc0b++3738+++4A42BCF" : 0,
-    "1ea843f7-ba9c-8149-9ebc-3ac108d5dc0b++2630+++7AE1893" : 0
+    "1ea843f7-ba9c-8149-9ebc-3ac108d5dc0b++2630+++7AE1893" : 0,
+    "115D6199A17EECA7FD5868EE4AA44DF2706A2FE1+++C12052E" : 9223372036854775807,
+    "1ea843f7-ba9c-8149-9ebc-3ac108d5dc0b++3738+++4A42BCF" : 0
   },
   "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "819F53A5-F65B-41F9-B963-D9E5350B4B1A",
   "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
     "1ea843f7-ba9c-8149-9ebc-3ac108d5dc0b++2479+++3E4FD47" : "WooChat\/WooChat\/Demo\/Other\/Image\/ios-icon\/",
     "1ea843f7-ba9c-8149-9ebc-3ac108d5dc0b++2479+++5734202" : "WooChat\/WooChat\/Demo\/Other\/Image\/System\/ios-icon\/",
-    "1ea843f7-ba9c-8149-9ebc-3ac108d5dc0b++3738+++4A42BCF" : "",
-    "1ea843f7-ba9c-8149-9ebc-3ac108d5dc0b++2630+++7AE1893" : ""
+    "1ea843f7-ba9c-8149-9ebc-3ac108d5dc0b++2630+++7AE1893" : "",
+    "115D6199A17EECA7FD5868EE4AA44DF2706A2FE1+++C12052E" : "git_iOS\/",
+    "1ea843f7-ba9c-8149-9ebc-3ac108d5dc0b++3738+++4A42BCF" : ""
   },
   "DVTSourceControlWorkspaceBlueprintNameKey" : "WooChat",
   "DVTSourceControlWorkspaceBlueprintVersion" : 204,
   "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "WooChat.xcworkspace",
   "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/chengxuyl\/WooChat_iOS.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "115D6199A17EECA7FD5868EE4AA44DF2706A2FE1+++C12052E"
+    },
     {
       "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "svn:\/\/192.168.1.199",
       "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",

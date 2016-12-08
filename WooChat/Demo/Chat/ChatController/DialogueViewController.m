@@ -55,7 +55,6 @@
     [self createPage];
     [super viewDidLoad];
       self.automaticallyAdjustsScrollViewInsets = NO;
-   
    UIButton *more = [[UIButton alloc]initWithFrame:CGRectMake(10, 10, 24, 24)];
    [more setBackgroundImage:[UIImage imageNamed:@"我"] forState:UIControlStateNormal];
    UIBarButtonItem *RightBtnItem = [[UIBarButtonItem alloc]initWithCustomView:more];
@@ -243,15 +242,6 @@
    }];
 }
 
-//-(void)viewDidAppear:(BOOL)animated{
-//    [UIView beginAnimations:nil context:NULL];
-//    [UIView setAnimationDuration:0.5];
-//    [UIView setAnimationDelay:0];
-//    
-//    self.navigationController.navigationBar.frame = CGRectMake(0, 0, SCREEN_WIDTH, 64);
-//   
-//    [UIView commitAnimations];
-//}
 #pragma mark - 创建页面
 //创建页面
 - (void)createPage{
@@ -294,7 +284,7 @@
     _tableView.delegate = self;
     _tableView.dataSource = self;
    
-    
+   [_tableView addHeaderWithTarget:self action:@selector(headerRereshing)];
    [_tableView registerNib:[UINib nibWithNibName:@"MyMessageViewCell" bundle:nil] forCellReuseIdentifier:@"MyMessageViewCell"];
    [_tableView registerNib:[UINib nibWithNibName:@"MyAudioTableViewCell" bundle:nil] forCellReuseIdentifier:@"MyAudioTableViewCell"];
    [_tableView registerNib:[UINib nibWithNibName:@"MyImageTableViewCell" bundle:nil] forCellReuseIdentifier:@"MyImageTableViewCell"];
@@ -338,7 +328,95 @@
          [self.tableView scrollToRowAtIndexPath:lastIndex atScrollPosition:UITableViewScrollPositionBottom animated:NO];
       }
    });
+//   NSLog(@"%f------height", self.tableView.contentSize.height);
 }
+
+-(void)reloadTableViewRefresh{
+   [self.tableView reloadData];
+   dispatch_async(dispatch_get_main_queue(), ^{
+      if (_dataSource.count) {
+         NSIndexPath *lastIndex = [NSIndexPath indexPathForRow:self.messages.count inSection:0];
+         [self.tableView scrollToRowAtIndexPath:lastIndex atScrollPosition:UITableViewScrollPositionTop animated:NO];
+      }
+   });
+}
+
+#pragma mark - refresh
+- (void)headerRereshing{
+   NSLog(@"加载聊天记录");
+   if (self.messages.count != 0) {
+   //获取当前会员聊天记录
+   if (self.friendIn == YES) {
+      self.messages =  [[[NIMSDK sharedSDK] conversationManager] messagesInSession:self.session
+                                                                           message:[self.messages firstObject]
+                                                                             limit:20];
+   }else{
+      self.messages =  [[[NIMSDK sharedSDK] conversationManager] messagesInSession:self.recent.session
+                                                                           message:[self.messages firstObject]
+                                                                             limit:20];
+   }
+      int i = 0;
+   for (NIMMessage *message in self.messages) {
+      if (![message.from isEqualToString:[UserInfo sharedInstance].imId]) {
+         //         self.otherMobile = [message.remoteExt objectForKey:@"mobile"];
+         //         NSLog(@"%@====from===%@===mobile===%@", [UserInfo sharedInstance].imId, message.from, [message.remoteExt objectForKey:@"mobile"]);
+      }
+      //表格视图刷新显示本条消息
+      DialogueModel *model = [[DialogueModel alloc]init];
+      NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+      NSDate *time = [NSDate dateWithTimeIntervalSince1970:message.timestamp];
+      [dateFormatter setDateFormat:@"HH:mm"];
+      model.message = message;
+      model.time = [dateFormatter stringFromDate:time];
+      model.messageType = message.messageType;
+      if (self.mod.imId.length == 0) {
+         self.mod = [FriendsInfoModel new];
+         self.mod.imId = message.session.sessionId;
+      }
+      //      model.isPlay = message.isPlayed;
+      //      NSLog(@"%d---isplay", message.isPlayed);
+      if (message.messageType == NIMMessageTypeText) {
+         model.text = message.text;
+      }else if (message.messageType == NIMMessageTypeImage){
+         NIMImageObject *imageObject = [[NIMImageObject alloc]init];
+         imageObject = (NIMImageObject *)message.messageObject;
+         model.imagePath = imageObject.path;
+         model.imageThumbPath = imageObject.thumbPath;
+         //         model.imagePic =
+      }else if (message.messageType == NIMMessageTypeAudio){
+         NIMAudioObject *audioObject = [[NIMAudioObject alloc]init];
+         audioObject = (NIMAudioObject *)message.messageObject;
+         model.audioPath = audioObject.path;
+         model.duration = audioObject.duration;
+      }else if(message.messageType == NIMMessageTypeTip){
+         model.text = message.text;
+         if (!message.isOutgoingMsg) {
+            FMDatabase *db = [[FMDatabase alloc] initWithPath:[UserInfo sharedInstance].dataBasePath];
+            [db open];
+            if (![db stringForQuery:@"SELECT nickName FROM PersonList WHERE mobile = ?",[message.remoteExt objectForKey:@"mobile"]]) {
+               [self upDateDB];
+            }
+         }
+      }
+      
+      if (message.isOutgoingMsg == YES) {
+         model.isRead = message.isRemoteRead;
+         model.myOrOther = @"my";
+      }else{
+         model.myOrOther = @"other";
+      }
+      [_dataSource insertObject:model atIndex:i];
+      
+      i++;
+   }
+   [self reloadTableViewRefresh];
+      [self.tableView headerEndRefreshing];}else{
+         [self.tableView headerEndRefreshing];}
+         
+}
+
+
+#pragma mark - tableViewDelegate and datasource
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return _dataSource.count;
 }
@@ -1004,7 +1082,8 @@ didCompleteWithError:(NSError *)error{
             model.messageType = NIMMessageTypeText;
             model.myOrOther = @"other";
             [_dataSource addObject:model];
-            [self reloadTableView];
+//            [self reloadTableView];
+            [self.tableView reloadData];
          }
          break;
          case NIMMessageTypeAudio:{
@@ -1020,7 +1099,8 @@ didCompleteWithError:(NSError *)error{
             model.time = [dateFormatter stringFromDate:time];
             model.myOrOther = @"other";
             [_dataSource addObject:model];
-            [self reloadTableView];
+//            [self reloadTableView];
+            [self.tableView reloadData];
             
          }
                break;
@@ -1037,7 +1117,8 @@ didCompleteWithError:(NSError *)error{
             model.time = [dateFormatter stringFromDate:time];
             model.myOrOther = @"other";
             [_dataSource addObject:model];
-            [self reloadTableView];
+            //            [self reloadTableView];
+            [self.tableView reloadData];
          }
             break;
          case NIMMessageTypeTip:{
@@ -1052,7 +1133,8 @@ didCompleteWithError:(NSError *)error{
             model.myOrOther = @"other";
             [_dataSource addObject:model];
             [self upDateDB];
-            [self reloadTableView];
+            //            [self reloadTableView];
+            [self.tableView reloadData];
             
          }
             break;

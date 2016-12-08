@@ -93,6 +93,15 @@
 		187CC51F1D8E2B8C009A60AB /* NavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 187CC51C1D8E2B8C009A60AB /* NavigationView.m */; };
 		187CC5201D8E2B8C009A60AB /* UIButton+_UnSelected.m in Sources */ = {isa = PBXBuildFile; fileRef = 187CC51E1D8E2B8C009A60AB /* UIButton+_UnSelected.m */; };
 		188DD4931D8E87C40021D452 /* OriginalPhoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 188DD4921D8E87C40021D452 /* OriginalPhoViewController.m */; };
+		18B173581DF9075B00837AA2 /* MJRefresh.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 18B173481DF9075B00837AA2 /* MJRefresh.bundle */; };
+		18B173591DF9075B00837AA2 /* MJRefreshBaseView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B1734B1DF9075B00837AA2 /* MJRefreshBaseView.m */; };
+		18B1735A1DF9075B00837AA2 /* MJRefreshConst.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B1734D1DF9075B00837AA2 /* MJRefreshConst.m */; };
+		18B1735B1DF9075B00837AA2 /* MJRefreshFooterView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B1734F1DF9075B00837AA2 /* MJRefreshFooterView.m */; };
+		18B1735C1DF9075B00837AA2 /* MJRefreshHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B173511DF9075B00837AA2 /* MJRefreshHeaderView.m */; };
+		18B1735D1DF9075B00837AA2 /* UIScrollView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B173531DF9075B00837AA2 /* UIScrollView+MJExtension.m */; };
+		18B1735E1DF9075B00837AA2 /* UIScrollView+MJRefresh.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B173551DF9075B00837AA2 /* UIScrollView+MJRefresh.m */; };
+		18B1735F1DF9075B00837AA2 /* UIView+MJExtension.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B173571DF9075B00837AA2 /* UIView+MJExtension.m */; };
+		18B173621DF93C9000837AA2 /* SearchChatHistroyViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 18B173611DF93C9000837AA2 /* SearchChatHistroyViewController.m */; };
 		18C707731D7670F500CFD8E9 /* MyMessageViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18C707711D7670F500CFD8E9 /* MyMessageViewCell.m */; };
 		18C707741D7670F500CFD8E9 /* MyMessageViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18C707721D7670F500CFD8E9 /* MyMessageViewCell.xib */; };
 		18CC42F41D8243B20071A95F /* OtherAudioTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18CC42F21D8243B20071A95F /* OtherAudioTableViewCell.m */; };
@@ -156,7 +165,6 @@
 		18EF362C1D98F8AB00A5BE64 /* translate_listener_select.png in Resources */ = {isa = PBXBuildFile; fileRef = 18EF35F61D98F8AB00A5BE64 /* translate_listener_select.png */; };
 		18EF362D1D98F8AB00A5BE64 /* translate_seaker_normal.png in Resources */ = {isa = PBXBuildFile; fileRef = 18EF35F71D98F8AB00A5BE64 /* translate_seaker_normal.png */; };
 		18EF362E1D98F8AB00A5BE64 /* translate_seaker_select.png in Resources */ = {isa = PBXBuildFile; fileRef = 18EF35F81D98F8AB00A5BE64 /* translate_seaker_select.png */; };
-		18EF36321D98F8AB00A5BE64 /* voicechat_speaker_01.png in Resources */ = {isa = PBXBuildFile; fileRef = 18EF35FC1D98F8AB00A5BE64 /* voicechat_speaker_01.png */; };
 		18EF36331D98F8AB00A5BE64 /* voicechat_speaker_02.png in Resources */ = {isa = PBXBuildFile; fileRef = 18EF35FD1D98F8AB00A5BE64 /* voicechat_speaker_02.png */; };
 		18EF36351D98F8AB00A5BE64 /* pressspeak.png in Resources */ = {isa = PBXBuildFile; fileRef = 18EF35FF1D98F8AB00A5BE64 /* pressspeak.png */; };
 		18EF36361D98F8AB00A5BE64 /* smiley_add_bt_s.png in Resources */ = {isa = PBXBuildFile; fileRef = 18EF36001D98F8AB00A5BE64 /* smiley_add_bt_s.png */; };
@@ -484,6 +492,24 @@
 		187CC51E1D8E2B8C009A60AB /* UIButton+_UnSelected.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+_UnSelected.m"; sourceTree = "<group>"; };
 		188DD4911D8E87C40021D452 /* OriginalPhoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OriginalPhoViewController.h; sourceTree = "<group>"; };
 		188DD4921D8E87C40021D452 /* OriginalPhoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OriginalPhoViewController.m; sourceTree = "<group>"; };
+		18B173481DF9075B00837AA2 /* MJRefresh.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MJRefresh.bundle; sourceTree = "<group>"; };
+		18B173491DF9075B00837AA2 /* MJRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefresh.h; sourceTree = "<group>"; };
+		18B1734A1DF9075B00837AA2 /* MJRefreshBaseView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshBaseView.h; sourceTree = "<group>"; };
+		18B1734B1DF9075B00837AA2 /* MJRefreshBaseView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshBaseView.m; sourceTree = "<group>"; };
+		18B1734C1DF9075B00837AA2 /* MJRefreshConst.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshConst.h; sourceTree = "<group>"; };
+		18B1734D1DF9075B00837AA2 /* MJRefreshConst.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshConst.m; sourceTree = "<group>"; };
+		18B1734E1DF9075B00837AA2 /* MJRefreshFooterView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshFooterView.h; sourceTree = "<group>"; };
+		18B1734F1DF9075B00837AA2 /* MJRefreshFooterView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshFooterView.m; sourceTree = "<group>"; };
+		18B173501DF9075B00837AA2 /* MJRefreshHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MJRefreshHeaderView.h; sourceTree = "<group>"; };
+		18B173511DF9075B00837AA2 /* MJRefreshHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MJRefreshHeaderView.m; sourceTree = "<group>"; };
+		18B173521DF9075B00837AA2 /* UIScrollView+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+MJExtension.h"; sourceTree = "<group>"; };
+		18B173531DF9075B00837AA2 /* UIScrollView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+MJExtension.m"; sourceTree = "<group>"; };
+		18B173541DF9075B00837AA2 /* UIScrollView+MJRefresh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIScrollView+MJRefresh.h"; sourceTree = "<group>"; };
+		18B173551DF9075B00837AA2 /* UIScrollView+MJRefresh.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIScrollView+MJRefresh.m"; sourceTree = "<group>"; };
+		18B173561DF9075B00837AA2 /* UIView+MJExtension.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+MJExtension.h"; sourceTree = "<group>"; };
+		18B173571DF9075B00837AA2 /* UIView+MJExtension.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+MJExtension.m"; sourceTree = "<group>"; };
+		18B173601DF93C9000837AA2 /* SearchChatHistroyViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchChatHistroyViewController.h; sourceTree = "<group>"; };
+		18B173611DF93C9000837AA2 /* SearchChatHistroyViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchChatHistroyViewController.m; sourceTree = "<group>"; };
 		18C707701D7670F500CFD8E9 /* MyMessageViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyMessageViewCell.h; sourceTree = "<group>"; };
 		18C707711D7670F500CFD8E9 /* MyMessageViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyMessageViewCell.m; sourceTree = "<group>"; };
 		18C707721D7670F500CFD8E9 /* MyMessageViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyMessageViewCell.xib; sourceTree = "<group>"; };
@@ -558,7 +584,6 @@
 		18EF35F61D98F8AB00A5BE64 /* translate_listener_select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = translate_listener_select.png; sourceTree = "<group>"; };
 		18EF35F71D98F8AB00A5BE64 /* translate_seaker_normal.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = translate_seaker_normal.png; sourceTree = "<group>"; };
 		18EF35F81D98F8AB00A5BE64 /* translate_seaker_select.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = translate_seaker_select.png; sourceTree = "<group>"; };
-		18EF35FC1D98F8AB00A5BE64 /* voicechat_speaker_01.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voicechat_speaker_01.png; sourceTree = "<group>"; };
 		18EF35FD1D98F8AB00A5BE64 /* voicechat_speaker_02.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = voicechat_speaker_02.png; sourceTree = "<group>"; };
 		18EF35FF1D98F8AB00A5BE64 /* pressspeak.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pressspeak.png; sourceTree = "<group>"; };
 		18EF36001D98F8AB00A5BE64 /* smiley_add_bt_s.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = smiley_add_bt_s.png; sourceTree = "<group>"; };
@@ -1074,6 +1099,29 @@
 			path = NavigationView;
 			sourceTree = "<group>";
 		};
+		18B173471DF9075B00837AA2 /* MJRefresh */ = {
+			isa = PBXGroup;
+			children = (
+				18B173481DF9075B00837AA2 /* MJRefresh.bundle */,
+				18B173491DF9075B00837AA2 /* MJRefresh.h */,
+				18B1734A1DF9075B00837AA2 /* MJRefreshBaseView.h */,
+				18B1734B1DF9075B00837AA2 /* MJRefreshBaseView.m */,
+				18B1734C1DF9075B00837AA2 /* MJRefreshConst.h */,
+				18B1734D1DF9075B00837AA2 /* MJRefreshConst.m */,
+				18B1734E1DF9075B00837AA2 /* MJRefreshFooterView.h */,
+				18B1734F1DF9075B00837AA2 /* MJRefreshFooterView.m */,
+				18B173501DF9075B00837AA2 /* MJRefreshHeaderView.h */,
+				18B173511DF9075B00837AA2 /* MJRefreshHeaderView.m */,
+				18B173521DF9075B00837AA2 /* UIScrollView+MJExtension.h */,
+				18B173531DF9075B00837AA2 /* UIScrollView+MJExtension.m */,
+				18B173541DF9075B00837AA2 /* UIScrollView+MJRefresh.h */,
+				18B173551DF9075B00837AA2 /* UIScrollView+MJRefresh.m */,
+				18B173561DF9075B00837AA2 /* UIView+MJExtension.h */,
+				18B173571DF9075B00837AA2 /* UIView+MJExtension.m */,
+			);
+			path = MJRefresh;
+			sourceTree = "<group>";
+		};
 		18C707671D7667E900CFD8E9 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1238,7 +1286,6 @@
 				18EF35F61D98F8AB00A5BE64 /* translate_listener_select.png */,
 				18EF35F71D98F8AB00A5BE64 /* translate_seaker_normal.png */,
 				18EF35F81D98F8AB00A5BE64 /* translate_seaker_select.png */,
-				18EF35FC1D98F8AB00A5BE64 /* voicechat_speaker_01.png */,
 				18EF35FD1D98F8AB00A5BE64 /* voicechat_speaker_02.png */,
 			);
 			path = translate_and_voicechat;
@@ -1498,6 +1545,8 @@
 				18EF94861D6A8D6F00493B9E /* ChatViewController.m */,
 				181ADE7E1D73E9240015441E /* DialogueViewController.h */,
 				181ADE7F1D73E9240015441E /* DialogueViewController.m */,
+				18B173601DF93C9000837AA2 /* SearchChatHistroyViewController.h */,
+				18B173611DF93C9000837AA2 /* SearchChatHistroyViewController.m */,
 				216C352B1DF1060700C75E3F /* ChatAudio2TextViewController.h */,
 				216C352C1DF1060800C75E3F /* ChatAudio2TextViewController.m */,
 				2101CC041DEE7DCE00F812DF /* ChatInfoViewController.h */,
@@ -1721,6 +1770,7 @@
 		18EF94B31D6A8D6F00493B9E /* ThirdParts */ = {
 			isa = PBXGroup;
 			children = (
+				18B173471DF9075B00837AA2 /* MJRefresh */,
 				21E83D5A1DF00BEC0001BBA5 /* NIM_iOS_SDK_v3.2.0 */,
 				2101CBF81DED677100F812DF /* MBProgressHUD */,
 				6E0209081DD590B6004D50DA /* Category */,
@@ -2205,6 +2255,7 @@
 			files = (
 				18EF358E1D98F78200A5BE64 /* Icon-60@3x.png in Resources */,
 				18FB58121D70417300E6DABF /* car.png in Resources */,
+				18B173581DF9075B00837AA2 /* MJRefresh.bundle in Resources */,
 				18EF36661D98F8EA00A5BE64 /* voicechat_listerner_03.png in Resources */,
 				18EF36161D98F8AB00A5BE64 /* all_photo.png in Resources */,
 				18EF366F1D98F8EA00A5BE64 /* transelate.png in Resources */,
@@ -2471,7 +2522,6 @@
 				18EF36181D98F8AB00A5BE64 /* image_cicle_select.png in Resources */,
 				18EF36691D98F8EA00A5BE64 /* voicechat_speaker_03.png in Resources */,
 				1856CE6D1DF6687200B4B3AB /* lang_malagasy_big.png in Resources */,
-				18EF36321D98F8AB00A5BE64 /* voicechat_speaker_01.png in Resources */,
 				18F384B81D80F42E00D68B83 /* MyAudioTableViewCell.xib in Resources */,
 				18FAF4621DF684A700F5BDD3 /* btn_9.png in Resources */,
 				18EF36221D98F8AB00A5BE64 /* speak_cancle.png in Resources */,
@@ -2560,9 +2610,12 @@
 				6E95C7C31DDC078700F5D134 /* AdvertisementHTMLViewController.m in Sources */,
 				6E95C7BD1DDB068E00F5D134 /* SetViewController.m in Sources */,
 				18EF95091D6A8D6F00493B9E /* FriendCircleViewController.m in Sources */,
+				18B1735C1DF9075B00837AA2 /* MJRefreshHeaderView.m in Sources */,
+				18B173621DF93C9000837AA2 /* SearchChatHistroyViewController.m in Sources */,
 				18DE59041D87DBD800C67EF1 /* PhoCollectionViewCell.m in Sources */,
 				6E0209071DD58D54004D50DA /* AdVertiseTableViewCell.m in Sources */,
 				21C8FC491DE52DE90069B77E /* AddressBookModel.m in Sources */,
+				18B1735E1DF9075B00837AA2 /* UIScrollView+MJRefresh.m in Sources */,
 				18EF95511D6AD73500493B9E /* RetrievePassWordViewController.m in Sources */,
 				187CC5201D8E2B8C009A60AB /* UIButton+_UnSelected.m in Sources */,
 				21C8FC031DE28B9E0069B77E /* FriendsInfoModel.m in Sources */,
@@ -2584,17 +2637,21 @@
 				2101CC0C1DEEAD0D00F812DF /* ChatBackGroundCollectionViewCell.m in Sources */,
 				18C707731D7670F500CFD8E9 /* MyMessageViewCell.m in Sources */,
 				6E95C7C01DDBF67100F5D134 /* AdvertisementModel.m in Sources */,
+				18B173591DF9075B00837AA2 /* MJRefreshBaseView.m in Sources */,
 				1856CDFB1DF6655700B4B3AB /* CountryTableViewCell.m in Sources */,
 				18F384B71D80F42E00D68B83 /* MyAudioTableViewCell.m in Sources */,
 				21C8FC4C1DE546250069B77E /* AddressBookViewController.m in Sources */,
 				18CFB7461D7FA2830017A88A /* MyImageTableViewCell.m in Sources */,
 				18D92FD41D6C3715009B1775 /* ToolsbarView.m in Sources */,
 				18EF955A1D6AE97700493B9E /* RegisterViewController.m in Sources */,
+				18B1735B1DF9075B00837AA2 /* MJRefreshFooterView.m in Sources */,
 				1856CDF81DF65B2E00B4B3AB /* CountryView.m in Sources */,
 				18FB57FC1D70392600E6DABF /* MoreView.m in Sources */,
+				18B1735D1DF9075B00837AA2 /* UIScrollView+MJExtension.m in Sources */,
 				6E0209581DD98F80004D50DA /* UserInfoModel.m in Sources */,
 				21C8FC521DE573000069B77E /* ContactsTableViewCell.m in Sources */,
 				181ADE831D7401780015441E /* DialogueView.m in Sources */,
+				18B1735A1DF9075B00837AA2 /* MJRefreshConst.m in Sources */,
 				18EF94671D6A8A6900493B9E /* AppDelegate.m in Sources */,
 				6E0209141DD590B6004D50DA /* UILabel+QuickLabel.m in Sources */,
 				18F26A801D7588EE00E87565 /* DialogueModel.m in Sources */,
@@ -2606,6 +2663,7 @@
 				6E95C7BC1DDB068E00F5D134 /* AddAuthViewController.m in Sources */,
 				18DE590B1D87DE5100C67EF1 /* PhoViewController.m in Sources */,
 				18EF94641D6A8A6900493B9E /* main.m in Sources */,
+				18B1735F1DF9075B00837AA2 /* UIView+MJExtension.m in Sources */,
 				21C8FC4F1DE55B380069B77E /* ContactsModel.m in Sources */,
 				18CC42F41D8243B20071A95F /* OtherAudioTableViewCell.m in Sources */,
 				6E0209241DD5A1F6004D50DA /* AboutMeViewController.m in Sources */,

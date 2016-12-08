@@ -27,4 +27,5 @@
 #import "MBProgressHUD.h"
 #import "ViewFactory.h"
 #import "NIMSDK.h"
+#import "MJRefresh.h"
 #endif /* PrefixHeader_pch */

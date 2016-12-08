@@ -8,6 +8,7 @@
 
 #import "ChatInfoViewController.h"
 #import "ChatBackGroundViewController.h"
+#import "SearchChatHistroyViewController.h"
 @interface ChatInfoViewController ()<UITableViewDelegate, UITableViewDataSource, NIMChatManagerDelegate>
 @property (nonatomic, strong) UITableView *tableView;
 @end
@@ -71,14 +72,9 @@
             break;
         case 2:
         {
-            NIMMessageSearchOption *option = [[NIMMessageSearchOption alloc] init];
-            option.searchContent = @"1";
-//            NSArray *uids = [self searchUsersByKeyword:self.keyWord users:self.members];
-//            option.fromIds       = uids;
-            option.limit         = 20;
-            [[[NIMSDK sharedSDK] conversationManager] searchMessages:self.session option:option result:^(NSError * _Nullable error, NSArray<NIMMessage *> * _Nullable messages) {
-                NSLog(@"%ld===messages", messages.count);
-            }];
+            SearchChatHistroyViewController *histroy = [SearchChatHistroyViewController new];
+            histroy.session =self.session;
+            [self.navigationController pushViewController:histroy animated:YES];
         }
             break;
         case 3:{

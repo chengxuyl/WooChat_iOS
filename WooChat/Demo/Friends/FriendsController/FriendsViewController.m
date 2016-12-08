@@ -140,8 +140,8 @@
                 FriendsInfoModel *mod = [FriendsInfoModel new];
                 [mod setValuesForKeysWithDictionary:dic];
                 //插入资料
-                [self.db executeUpdate:@"INSERT INTO PersonList (nickName, mobile, imId, icon) VALUES (?,?,?,?)",
-                 mod.nickName, mod.mobile, mod.imId, mod.icon];
+                [self.db executeUpdate:@"INSERT INTO PersonList (nickName, mobile, imId, icon, chatBackGround) VALUES (?,?,?,?, ?)",
+                 mod.nickName, mod.mobile, mod.imId, mod.icon, @""];
             }
             [self sortContacts];
             [self.tableView reloadData];
