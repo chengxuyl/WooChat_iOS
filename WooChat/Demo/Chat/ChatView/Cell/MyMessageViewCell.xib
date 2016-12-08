@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11761" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="MyMessageViewCell" rowHeight="174" id="KGk-i7-Jjw" customClass="MyMessageViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="457" height="174"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="457" height="173"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1" verticalCompressionResistancePriority="1" image="enter.png" translatesAutoresizingMaskIntoConstraints="NO" id="SaH-70-ijG">
+                        <rect key="frame" x="327" y="51" width="72" height="107"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vSE-6n-lQM">
+                        <rect key="frame" x="212" y="25" width="33" height="16"/>
+                        <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chat_select.png" translatesAutoresizingMaskIntoConstraints="NO" id="2Vr-TU-9IQ">
+                        <rect key="frame" x="399" y="51" width="50" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="2Vr-TU-9IQ" secondAttribute="height" multiplier="1:1" id="jLT-be-axI"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="245" translatesAutoresizingMaskIntoConstraints="NO" id="jfy-je-IO5">
+                        <rect key="frame" x="337" y="61" width="42" height="87"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="已读" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IGt-uW-FJw">
+                        <rect key="frame" x="284" y="137" width="35" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="butterfly_stand.png" translatesAutoresizingMaskIntoConstraints="NO" id="tP0-Aw-9bn">
+                        <rect key="frame" x="292" y="125" width="30" height="30"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="30" id="Xp7-s6-D4J"/>
+                            <constraint firstAttribute="width" constant="30" id="cEf-OF-nO6"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="SaH-70-ijG" firstAttribute="top" secondItem="vSE-6n-lQM" secondAttribute="bottom" constant="10" id="6dw-VX-a2K"/>
+                    <constraint firstItem="SaH-70-ijG" firstAttribute="bottom" secondItem="jfy-je-IO5" secondAttribute="bottom" priority="750" constant="10" id="A2e-gJ-20w"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="jfy-je-IO5" secondAttribute="trailing" constant="70" id="DYz-kk-Wwf"/>
+                    <constraint firstItem="vSE-6n-lQM" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="GPp-EF-OvL"/>
+                    <constraint firstItem="tP0-Aw-9bn" firstAttribute="centerX" secondItem="IGt-uW-FJw" secondAttribute="centerX" constant="5.5" id="H6S-aV-sbU"/>
+                    <constraint firstItem="jfy-je-IO5" firstAttribute="leading" relation="greaterThanOrEqual" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="50" id="JMS-iv-fag"/>
+                    <constraint firstItem="SaH-70-ijG" firstAttribute="leading" secondItem="IGt-uW-FJw" secondAttribute="trailing" constant="8" symbolic="YES" id="JY4-LS-AaK"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="tP0-Aw-9bn" secondAttribute="bottom" constant="10" id="Kr9-Hn-uvD"/>
+                    <constraint firstItem="SaH-70-ijG" firstAttribute="trailing" secondItem="jfy-je-IO5" secondAttribute="trailing" priority="750" constant="20" id="OIQ-Lu-mI5"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="2Vr-TU-9IQ" secondAttribute="trailing" id="OMZ-b9-4La"/>
+                    <constraint firstItem="SaH-70-ijG" firstAttribute="leading" secondItem="jfy-je-IO5" secondAttribute="leading" priority="750" constant="-10" id="RSf-mW-KAm"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="jfy-je-IO5" secondAttribute="bottom" constant="17" id="XFk-rb-xzd"/>
+                    <constraint firstItem="2Vr-TU-9IQ" firstAttribute="top" secondItem="SaH-70-ijG" secondAttribute="top" id="cIQ-6y-Beh"/>
+                    <constraint firstItem="SaH-70-ijG" firstAttribute="top" secondItem="jfy-je-IO5" secondAttribute="top" priority="750" constant="-10" id="dVr-QR-HE3"/>
+                    <constraint firstItem="2Vr-TU-9IQ" firstAttribute="leading" secondItem="jfy-je-IO5" secondAttribute="trailing" constant="20" id="pXf-g4-3vY"/>
+                    <constraint firstItem="vSE-6n-lQM" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="17" id="slh-yW-5bS"/>
+                    <constraint firstItem="SaH-70-ijG" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="2Vr-TU-9IQ" secondAttribute="bottom" id="vWA-vI-Qte"/>
+                    <constraint firstItem="SaH-70-ijG" firstAttribute="bottom" secondItem="IGt-uW-FJw" secondAttribute="bottom" id="zvX-5s-21y"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="MessageLabelBKImage" destination="SaH-70-ijG" id="CDc-on-9Ze"/>
+                <outlet property="fly" destination="tP0-Aw-9bn" id="tip-Jp-Vuo"/>
+                <outlet property="headImage" destination="2Vr-TU-9IQ" id="hNl-er-4dG"/>
+                <outlet property="messageLabel" destination="jfy-je-IO5" id="3eV-5O-py4"/>
+                <outlet property="read" destination="IGt-uW-FJw" id="dHg-w3-Ubi"/>
+                <outlet property="timeLabel" destination="vSE-6n-lQM" id="Rzk-l7-1KI"/>
+            </connections>
+            <point key="canvasLocation" x="442.5" y="667"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="butterfly_stand.png" width="90" height="85"/>
+        <image name="chat_select.png" width="180" height="180"/>
+        <image name="enter.png" width="160" height="122"/>
+    </resources>
+</document>

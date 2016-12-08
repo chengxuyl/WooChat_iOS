@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11761" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="171" id="KGk-i7-Jjw" customClass="OthersMessageViewCell">
+            <rect key="frame" x="0.0" y="0.0" width="457" height="171"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="457" height="170"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1" verticalCompressionResistancePriority="1" misplaced="YES" image="enter.png" translatesAutoresizingMaskIntoConstraints="NO" id="Yhi-IT-757">
+                        <rect key="frame" x="72" y="61" width="257" height="68"/>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="245" translatesAutoresizingMaskIntoConstraints="NO" id="VYg-ph-JF5">
+                        <rect key="frame" x="78" y="70" width="245" height="50"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1iZ-g0-lRT">
+                        <rect key="frame" x="178" y="20" width="100" height="21"/>
+                        <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="chat_select.png" translatesAutoresizingMaskIntoConstraints="NO" id="cms-DK-ZL0">
+                        <rect key="frame" x="8" y="70" width="50" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="cms-DK-ZL0" secondAttribute="height" multiplier="1:1" id="a2w-e3-0pP"/>
+                        </constraints>
+                    </imageView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="1iZ-g0-lRT" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="17" id="0zv-yW-2mB"/>
+                    <constraint firstAttribute="trailingMargin" relation="greaterThanOrEqual" secondItem="Yhi-IT-757" secondAttribute="trailing" constant="50" id="7sn-kq-gWm"/>
+                    <constraint firstItem="Yhi-IT-757" firstAttribute="leading" secondItem="VYg-ph-JF5" secondAttribute="leading" constant="-20" id="DuP-J6-Uok"/>
+                    <constraint firstItem="VYg-ph-JF5" firstAttribute="leading" secondItem="cms-DK-ZL0" secondAttribute="trailing" constant="20" id="E4x-q8-91f"/>
+                    <constraint firstItem="Yhi-IT-757" firstAttribute="top" secondItem="VYg-ph-JF5" secondAttribute="top" constant="-10" id="Rts-0i-v1y"/>
+                    <constraint firstItem="VYg-ph-JF5" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="70" id="UPb-28-bIc"/>
+                    <constraint firstItem="Yhi-IT-757" firstAttribute="top" secondItem="1iZ-g0-lRT" secondAttribute="bottom" constant="10" id="bTX-YD-AeE"/>
+                    <constraint firstItem="Yhi-IT-757" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="cms-DK-ZL0" secondAttribute="bottom" id="bsQ-cC-eRy"/>
+                    <constraint firstItem="Yhi-IT-757" firstAttribute="bottom" secondItem="VYg-ph-JF5" secondAttribute="bottom" constant="10" id="eDl-Mh-ThX"/>
+                    <constraint firstAttribute="leadingMargin" secondItem="cms-DK-ZL0" secondAttribute="leading" id="h2g-8w-Vcu"/>
+                    <constraint firstItem="Yhi-IT-757" firstAttribute="trailing" secondItem="VYg-ph-JF5" secondAttribute="trailing" constant="10" id="kbg-66-W2N"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="VYg-ph-JF5" secondAttribute="bottom" constant="17" id="mfp-Xy-Tzy"/>
+                    <constraint firstItem="1iZ-g0-lRT" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="uFE-bY-3dF"/>
+                    <constraint firstItem="cms-DK-ZL0" firstAttribute="top" secondItem="Yhi-IT-757" secondAttribute="top" id="wC8-6D-pY9"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="MessageLabelBKImage" destination="Yhi-IT-757" id="Ydh-tI-PCD"/>
+                <outlet property="headImage" destination="cms-DK-ZL0" id="UGq-bt-sfV"/>
+                <outlet property="messageLabel" destination="VYg-ph-JF5" id="76r-qi-fMg"/>
+                <outlet property="timeLabel" destination="1iZ-g0-lRT" id="Dj9-Tr-4ZD"/>
+            </connections>
+            <point key="canvasLocation" x="288.5" y="311.5"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="chat_select.png" width="180" height="180"/>
+        <image name="enter.png" width="160" height="122"/>
+    </resources>
+</document>

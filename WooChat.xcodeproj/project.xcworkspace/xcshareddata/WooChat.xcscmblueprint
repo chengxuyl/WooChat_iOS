@@ -1,0 +1,24 @@
+{
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+    "1ea843f7-ba9c-8149-9ebc-3ac108d5dc0b++2479" : {
+
+    }
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "1ea843f7-ba9c-8149-9ebc-3ac108d5dc0b++2479" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "C13DAB54-3AB9-4E62-8732-60E3E6D37143",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "1ea843f7-ba9c-8149-9ebc-3ac108d5dc0b++2479" : ""
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "WooChat",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "WooChat.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "svn:\/\/192.168.1.199",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "1ea843f7-ba9c-8149-9ebc-3ac108d5dc0b++2479"
+    }
+  ]
+}

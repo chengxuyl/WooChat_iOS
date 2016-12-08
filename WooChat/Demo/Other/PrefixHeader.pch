@@ -1,0 +1,30 @@
+//
+//  PrefixHeader.pch
+//  WooChat
+//
+//  Created by apple on 16/8/22.
+//  Copyright © 2016年 Qubeon. All rights reserved.
+//
+#import "Masonry.h"
+
+#ifndef PrefixHeader_pch
+#define PrefixHeader_pch
+
+#define SCREEN_WIDTH ([UIScreen mainScreen].bounds.size.width)
+#define SCREEN_HEIGHT ([UIScreen mainScreen].bounds.size.height)
+
+#define MYCOLOR_GRAY [UIColor colorWithRed:153/255.0 green:153/255.0 blue:153/255.0 alpha:1]
+#define MYCOLOR_BLUE [UIColor colorWithRed:0/255.0 green:180/255.0 blue:255/255.0 alpha:1]
+#define MYCOLOR_BackGroudColor [UIColor colorWithRed:230/255.0 green:230/255.0 blue:235/255.0 alpha:1]
+#define MYCOLOR_Line [UIColor colorWithRed:205/255.0 green:205/255.0 blue:205/255.0 alpha:1]
+#define MYCOLOR_LightGray [UIColor colorWithRed:250/255.0 green:250/255.0 blue:250/255.0 alpha:1]
+
+#import "UIView+LayoutMethods.h"
+#import "ServerAPI.h"
+#import "UserInfo.h"
+#import <FMDB.h>
+#import <UIImageView+WebCache.h>
+#import "MBProgressHUD.h"
+#import "ViewFactory.h"
+#import "NIMSDK.h"
+#endif /* PrefixHeader_pch */
