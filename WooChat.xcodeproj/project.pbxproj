@@ -90,6 +90,7 @@
 		1856CE8E1DF6687200B4B3AB /* no_translate.png in Resources */ = {isa = PBXBuildFile; fileRef = 1856CE451DF6687200B4B3AB /* no_translate.png */; };
 		186E9FF61D6ED39000799ADA /* TableViewModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 186E9FF51D6ED39000799ADA /* TableViewModel.m */; };
 		186E9FFA1D6EE06600799ADA /* NSString+PinYin.m in Sources */ = {isa = PBXBuildFile; fileRef = 186E9FF91D6EE06600799ADA /* NSString+PinYin.m */; };
+		187141AE1DFA8324009BEACD /* ShowAlbumViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 187141AD1DFA8324009BEACD /* ShowAlbumViewController.m */; };
 		187CC51F1D8E2B8C009A60AB /* NavigationView.m in Sources */ = {isa = PBXBuildFile; fileRef = 187CC51C1D8E2B8C009A60AB /* NavigationView.m */; };
 		187CC5201D8E2B8C009A60AB /* UIButton+_UnSelected.m in Sources */ = {isa = PBXBuildFile; fileRef = 187CC51E1D8E2B8C009A60AB /* UIButton+_UnSelected.m */; };
 		188DD4931D8E87C40021D452 /* OriginalPhoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 188DD4921D8E87C40021D452 /* OriginalPhoViewController.m */; };
@@ -486,6 +487,8 @@
 		186E9FF51D6ED39000799ADA /* TableViewModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TableViewModel.m; sourceTree = "<group>"; };
 		186E9FF81D6EE06600799ADA /* NSString+PinYin.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+PinYin.h"; sourceTree = "<group>"; };
 		186E9FF91D6EE06600799ADA /* NSString+PinYin.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+PinYin.m"; sourceTree = "<group>"; };
+		187141AC1DFA8324009BEACD /* ShowAlbumViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ShowAlbumViewController.h; sourceTree = "<group>"; };
+		187141AD1DFA8324009BEACD /* ShowAlbumViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ShowAlbumViewController.m; sourceTree = "<group>"; };
 		187CC51B1D8E2B8C009A60AB /* NavigationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NavigationView.h; sourceTree = "<group>"; };
 		187CC51C1D8E2B8C009A60AB /* NavigationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NavigationView.m; sourceTree = "<group>"; };
 		187CC51D1D8E2B8C009A60AB /* UIButton+_UnSelected.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+_UnSelected.h"; sourceTree = "<group>"; };
@@ -1545,6 +1548,8 @@
 				18EF94861D6A8D6F00493B9E /* ChatViewController.m */,
 				181ADE7E1D73E9240015441E /* DialogueViewController.h */,
 				181ADE7F1D73E9240015441E /* DialogueViewController.m */,
+				187141AC1DFA8324009BEACD /* ShowAlbumViewController.h */,
+				187141AD1DFA8324009BEACD /* ShowAlbumViewController.m */,
 				18B173601DF93C9000837AA2 /* SearchChatHistroyViewController.h */,
 				18B173611DF93C9000837AA2 /* SearchChatHistroyViewController.m */,
 				216C352B1DF1060700C75E3F /* ChatAudio2TextViewController.h */,
@@ -2617,6 +2622,7 @@
 				21C8FC491DE52DE90069B77E /* AddressBookModel.m in Sources */,
 				18B1735E1DF9075B00837AA2 /* UIScrollView+MJRefresh.m in Sources */,
 				18EF95511D6AD73500493B9E /* RetrievePassWordViewController.m in Sources */,
+				187141AE1DFA8324009BEACD /* ShowAlbumViewController.m in Sources */,
 				187CC5201D8E2B8C009A60AB /* UIButton+_UnSelected.m in Sources */,
 				21C8FC031DE28B9E0069B77E /* FriendsInfoModel.m in Sources */,
 				6E0209171DD590B6004D50DA /* UIView+LayoutMethods.m in Sources */,

@@ -7,11 +7,12 @@
 //
 
 #import "SearchChatHistroyViewController.h"
-
+#import "ChatViewTableViewCell.h"
 @interface SearchChatHistroyViewController ()< UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate>
 @property (nonatomic, strong) UISearchController *searchController;
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *searchList;
+@property (nonatomic, strong) UILabel *noLabel;
 @end
 
 @implementation SearchChatHistroyViewController
@@ -24,19 +25,28 @@
     
     [self createTableView];
     [self createSearch];
+    
+    /* 无结果label */
+    self.noLabel.frame = CGRectMake(0, 0, 100, 50);
+    self.noLabel.center = self.view.center;
+    self.noLabel.hidden = YES;
+    [self.view addSubview:self.noLabel];
 }
 
 #pragma mark- TableView
 - (void)createTableView{
-    _tableView = [[UITableView alloc] initWithFrame:self.view.frame];
+    _tableView = [[UITableView alloc] initWithFrame:self.view.frame style:(UITableViewStylePlain)];
     _tableView.delegate = self;
     _tableView.dataSource = self;
+    [_tableView registerClass:[ChatViewTableViewCell class] forCellReuseIdentifier:[ChatViewTableViewCell cellIdentifier]];
+    _tableView.tableFooterView  = [[UIView alloc] init];
+    _tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     [self.view addSubview:_tableView];
     
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 60;
+    return 70.f;
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView{
@@ -58,22 +68,33 @@
 
 //返回单元格内容
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath{
-    static NSString *flag=@"cellFlag";
-    UITableViewCell *cell=[tableView dequeueReusableCellWithIdentifier:flag];
-    if (cell==nil) {
-        cell=[[UITableViewCell alloc]initWithStyle:UITableViewCellStyleDefault reuseIdentifier:flag];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        //取消选中状态
-        //        [cell setSelectionStyle:UITableViewCellSelectionStyleNone];
-        cell.backgroundColor = [UIColor colorWithRed:arc4random()%255/256.0f green:arc4random()%255/256.0f  blue:arc4random()%255/256.0f  alpha:1];
-    }
-    if (self.searchController.active) {
-        //        _tableView.hidden = NO;
-        NIMMessage *message = self.searchList[indexPath.row];
-        [cell.textLabel setText:message.text];
-    }
     
+    ChatViewTableViewCell *cell= [tableView dequeueReusableCellWithIdentifier:[ChatViewTableViewCell cellIdentifier]];
     
+    NIMMessage *message = self.searchList[indexPath.row];
+    FMDatabase *db = [FMDatabase databaseWithPath:[[UserInfo sharedInstance] dataBasePath]];
+    [db open];
+
+    [cell.iconImageView sd_setImageWithURL:[NSURL URLWithString:[db stringForQuery:@"SELECT icon FROM PersonList WHERE imId = ?",message.session.sessionId]] placeholderImage:[UIImage imageNamed:@"chat"]] ;
+    [db close];
+
+    if (!message.senderName) {
+        cell.nameLabel.text = [UserInfo sharedInstance].nickName;
+    }else{
+        cell.nameLabel.text = message.senderName;
+    }
+    cell.conLabel.text = message.text;
+    NSDate *detaildate=[NSDate dateWithTimeIntervalSince1970:message.timestamp];
+    
+    //实例化一个NSDateFormatter对象
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    //设定时间格式,这里可以设置成自己需要的格式
+    [dateFormatter setDateFormat:@"MM-dd HH:mm"];
+    NSString *currentDateStr = [dateFormatter stringFromDate: detaildate];
+    
+    cell.timeLabel.text = currentDateStr;
+    cell.noLabel.hidden = YES;
+
     return cell;
 }
 
@@ -104,6 +125,11 @@
     //            option.fromIds       = uids;
     option.limit         = 20;
     [[[NIMSDK sharedSDK] conversationManager] searchMessages:self.session option:option result:^(NSError * _Nullable error, NSArray<NIMMessage *> * _Nullable messages) {
+        if (messages.count == 0) {
+            self.noLabel.hidden = NO;
+        }else{
+            self.noLabel.hidden = YES;
+        }
         self.searchList = [NSMutableArray arrayWithArray:messages];
         [self.tableView reloadData];
     }];}
@@ -111,6 +137,15 @@
     return YES;
 }
 
+#pragma mark - setters and getters 
+- (UILabel *)noLabel{
+    if (!_noLabel) {
+        _noLabel = [UILabel new];
+        _noLabel.text = @"无结果";
+        _noLabel.textAlignment = NSTextAlignmentCenter;
+    }
+    return _noLabel;
+}
 - (void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
     [self.searchController dismissViewControllerAnimated:NO completion:nil];

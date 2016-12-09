@@ -16,6 +16,14 @@
     self.read.hidden = YES;
     self.fly.animationImages = [NSArray arrayWithObjects:[UIImage imageNamed:@"butterfly_fly_03"], [UIImage imageNamed:@"butterfly_fly_02"], [UIImage imageNamed:@"butterfly_fly_01"],nil];
     [self.fly setAnimationDuration:0.3f];
+    
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
+    [_MessageImage addGestureRecognizer:tap];
+    _MessageImage.userInteractionEnabled = YES;
+}
+
+- (void)tap{
+    [self.delegate myImageTapWithCell:self];
 }
 
 - (void)removeTime{

@@ -14,5 +14,6 @@
 @property (nonatomic, strong) UILabel *conLabel;
 @property (nonatomic, strong) UILabel *timeLabel;
 @property (nonatomic, strong) UILabel *noLabel;
+
 + (NSString *)cellIdentifier;
 @end

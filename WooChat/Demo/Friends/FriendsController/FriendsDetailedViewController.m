@@ -139,6 +139,12 @@
     
     [UIView commitAnimations];
 }
+
+- (void)setMod:(FriendsInfoModel *)mod{
+    if (_mod != mod) {
+        _mod  = mod;
+    }
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }

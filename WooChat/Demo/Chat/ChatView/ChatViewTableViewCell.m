@@ -52,6 +52,7 @@
 }
 
 #pragma mark - setters and getters
+
 - (UIImageView *)iconImageView{
     if (!_iconImageView) {
         _iconImageView = [UIImageView new];

@@ -13,6 +13,13 @@
 - (void)awakeFromNib {
     [super awakeFromNib];
     // Initialization code
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tap)];
+    [_MessageImage addGestureRecognizer:tap];
+    _MessageImage.userInteractionEnabled = YES;
+}
+
+- (void)tap{
+    [self.delegate otherImageTapWithCell:self];
 }
 - (void)removeTime{
     [_timeLabel removeFromSuperview];

@@ -24,9 +24,10 @@
 #import "NIMConversationManagerProtocol.h"
 #import "ChatInfoViewController.h"
 #import "ChatAudio2TextViewController.h"
+#import "ShowAlbumViewController.h"
 #define weakify(var)   __weak typeof(var) weakSelf = var
 #define strongify(var) __strong typeof(var) strongSelf = var
-@interface DialogueViewController ()<UITextViewDelegate,UITableViewDelegate,UITableViewDataSource,NIMChatManagerDelegate,NIMMediaManagerDelgate, MyAudioTableViewCellDelegate, OtherAudioTableViewCellDelegate>
+@interface DialogueViewController ()<UITextViewDelegate,UITableViewDelegate,UITableViewDataSource,NIMChatManagerDelegate,NIMMediaManagerDelgate, MyAudioTableViewCellDelegate, OtherAudioTableViewCellDelegate, MyImageTableViewCellDelegate, OtherImageTableViewCellDelegate>
 @property UITableView *tableView;
 @property NSMutableArray *dataSource;
 @property DialogueView *dialogueV;
@@ -283,7 +284,6 @@
     _tableView = [[UITableView alloc]initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT - SCREEN_HEIGHT/13 - 64)];
     _tableView.delegate = self;
     _tableView.dataSource = self;
-   
    [_tableView addHeaderWithTarget:self action:@selector(headerRereshing)];
    [_tableView registerNib:[UINib nibWithNibName:@"MyMessageViewCell" bundle:nil] forCellReuseIdentifier:@"MyMessageViewCell"];
    [_tableView registerNib:[UINib nibWithNibName:@"MyAudioTableViewCell" bundle:nil] forCellReuseIdentifier:@"MyAudioTableViewCell"];
@@ -336,7 +336,7 @@
    dispatch_async(dispatch_get_main_queue(), ^{
       if (_dataSource.count) {
          NSIndexPath *lastIndex = [NSIndexPath indexPathForRow:self.messages.count inSection:0];
-         [self.tableView scrollToRowAtIndexPath:lastIndex atScrollPosition:UITableViewScrollPositionTop animated:NO];
+         [self.tableView scrollToRowAtIndexPath:lastIndex atScrollPosition:UITableViewScrollPositionBottom animated:NO];
       }
    });
 }
@@ -578,6 +578,7 @@
             MyImageTableViewCell *myCell = [tableView dequeueReusableCellWithIdentifier:@"MyImageTableViewCell" forIndexPath:indexPath];
             myCell.model = model;
             myCell.fly.alpha = 1.0;
+            myCell.delegate = self;
             if (model.isRead == YES) {
                myCell.fly.image = [UIImage imageNamed:@"butterfly_fly_01"];
             }else{
@@ -586,10 +587,6 @@
             myCell.path = model.imagePath;
 //            myCell.MessageImage.image = model.imagePic;
             [myCell.MessageImage setImage:[UIImage imageWithContentsOfFile:model.imageThumbPath]];
-            UITapGestureRecognizer *Tap =[[UITapGestureRecognizer alloc] initWithTarget:self
-                                                                                 action:@selector(Tap:)];
-            [myCell.MessageImage addGestureRecognizer:Tap];
-            myCell.MessageImage.userInteractionEnabled = YES;
             if (indexPath.row-1 >= 0) {
                model1 = _dataSource[indexPath.row-1];
                if ([model1.time isEqualToString:model.time]) {
@@ -603,6 +600,7 @@
             OtherImageTableViewCell *otherCell = [tableView dequeueReusableCellWithIdentifier:@"OtherImageTableViewCell" forIndexPath:indexPath];
             otherCell.model = model;
             otherCell.path = model.imagePath;
+            otherCell.delegate = self;
 //            otherCell.MessageImage.image = model.imagePic;
             [otherCell.MessageImage setImage:[UIImage imageWithContentsOfFile:model.imageThumbPath]];
             otherCell.MessageImage.userInteractionEnabled = YES;
@@ -767,7 +765,28 @@
 {
    return YES;
 }
+#pragma mark - My / Other ImageTapTableViewCellDelegate
+- (void)myImageTapWithCell:(MyImageTableViewCell *)tableViewCell{
+   ShowAlbumViewController *vc = [ShowAlbumViewController new];
+   if (self.friendIn == YES) {
+      vc.session = self.session;
+   }else{
+         vc.session = self.recent.session;
+      }
+   vc.message = tableViewCell.model.message;
+   [self.navigationController pushViewController:vc animated:YES];
+}
 
+- (void)otherImageTapWithCell:(OtherImageTableViewCell *)tableViewCell{
+   ShowAlbumViewController *vc = [ShowAlbumViewController new];
+   if (self.friendIn == YES) {
+      vc.session = self.session;
+   }else{
+      vc.session = self.recent.session;
+   }
+   vc.message = tableViewCell.model.message;
+   [self.navigationController pushViewController:vc animated:YES];
+}
 #pragma mark - My / Other AudioTableViewCellDelegate
 - (void)myAudioTableViewCellTapWithCell:(MyAudioTableViewCell *)tableViewCell{
    if ([self.playPath isEqualToString:tableViewCell.mod.audioPath]) {
@@ -812,11 +831,6 @@
    self.AudioDone();
    self.playPath = @"";
    NSLog(@"播完了");
-}
-
-/** 图片cell点击手势 */
-- (void)Tap:(UITapGestureRecognizer *)tap{
-   NSLog(@"点击图片");
 }
 
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView{
@@ -1064,12 +1078,25 @@ didCompleteWithError:(NSError *)error{
    }}
    
 }
+
+#pragma mark - 收到撤回通知
+- (void)onRecvRevokeMessageNotification:(NIMRevokeMessageNotification *)notification{
+   if ([notification.session.sessionId isEqualToString:self.mod.imId]) {
+      for (DialogueModel *mod in self.dataSource) {
+         if ([mod.message isEqual: notification.message]) {
+            [self.dataSource removeObject:mod];
+         }
+      }
+      [self reloadTableView];
+   }
+}
 #pragma mark - 消息接收
 - (void)onRecvMessages:(NSArray<NIMMessage *> *)messages{
-   [[NIMSDK sharedSDK].conversationManager markAllMessagesReadInSession:[messages lastObject].session];
-   [[NIMSDK sharedSDK].chatManager sendMessageReceipt:[[NIMMessageReceipt alloc] initWithMessage:[messages lastObject]] completion:nil];
+   
    for (NIMMessage *message in messages) {
       if ([message.session.sessionId isEqualToString:self.mod.imId]) {
+         [[NIMSDK sharedSDK].conversationManager markAllMessagesReadInSession:[messages lastObject].session];
+         [[NIMSDK sharedSDK].chatManager sendMessageReceipt:[[NIMMessageReceipt alloc] initWithMessage:[messages lastObject]] completion:nil];
       DialogueModel *model = [[DialogueModel alloc]init];
       model.message = message;
       switch (message.messageType) {

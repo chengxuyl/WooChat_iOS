@@ -14,6 +14,7 @@
 @synthesize passWord = _passWord;
 @synthesize imId = _imId;
 @synthesize imToken = _imToken;
+@synthesize nickName = _nickName;
 + (instancetype)sharedInstance
 {
     static id instance = nil;
@@ -53,6 +54,13 @@
     }
 }
 
+- (void)setNickName:(NSString *)nickName{
+    if (_nickName != nickName) {
+        _nickName = nickName;
+        [[NSUserDefaults standardUserDefaults] setObject:_nickName forKey:@"nickName"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
 
 - (void)setPassWord:(NSString *)passWord{
     if (_passWord != passWord) {
@@ -75,6 +83,14 @@
         _imToken = imToken;
         [[NSUserDefaults standardUserDefaults] setObject:imToken forKey:@"imToken"];
         [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
+
+- (NSString *)nickName{
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"nickName"] length] > 0) {
+        return [[NSUserDefaults standardUserDefaults] objectForKey:@"nickName"];
+    }else{
+        return _nickName;
     }
 }
 
