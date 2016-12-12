@@ -9,6 +9,7 @@
 #import "ServerAPI.h"
 #import <CommonCrypto/CommonDigest.h>
 #import <AFNetworking.h>
+#import <CommonCrypto/CommonDigest.h>
 #define URLSTR @"http://192.168.1.247:8080/member/%@"
 
 @interface NSString (NIMSHA1)
@@ -173,6 +174,38 @@
 }
 
 
+- (void)translateWithText:(NSString *)text toLang:(NSString *)lang success:(void(^)(NSString *result))success failure:(void(^)())failure{
+    AFHTTPSessionManager *manager = [[AFHTTPSessionManager alloc] init];
+    manager.requestSerializer = [AFHTTPRequestSerializer serializer];
+    manager.responseSerializer = [AFJSONResponseSerializer serializer];
+    NSString *sign = [self md5:[NSString stringWithFormat:@"20161212000033872%@14356602884p5ohaJ3sz56cFhgpCpI",text]] ;
+    NSString *textUTF8 = [text stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSString *url = [NSString stringWithFormat:@"http://api.fanyi.baidu.com/api/trans/vip/translate?q=%@&from=auto&to=%@&appid=20161212000033872&salt=1435660288&sign=%@", textUTF8,lang,sign];
+    [manager GET:url parameters:nil success:^(NSURLSessionDataTask * _Nonnull task, id  _Nullable responseObject) {
+        NSArray *arr = [responseObject objectForKey:@"trans_result"];
+        NSDictionary *dic = arr[0];
+        NSString *result = [[dic objectForKey:@"dst"] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+        success(result);
+    } failure:^(NSURLSessionDataTask * _Nullable task, NSError * _Nonnull error) {
+        failure();
+    }];
+
+}
+
+#pragma mark -md5
+- (NSString *)md5:(NSString *) input {
+    const char *cStr = [input UTF8String];
+    unsigned char digest[CC_MD5_DIGEST_LENGTH];
+    CC_MD5( cStr, strlen(cStr), digest ); // This is the md5 call
+    
+    NSMutableString *output = [NSMutableString stringWithCapacity:CC_MD5_DIGEST_LENGTH * 2];
+    
+    for(int i = 0; i < CC_MD5_DIGEST_LENGTH; i++)
+        [output appendFormat:@"%02x", digest[i]];
+    
+    return  output;
+}
+
 - (NSMutableArray *)countryList {
     
     if (!_countryList) {
@@ -190,5 +223,6 @@
     
     return _countryList;
 }
+
 
 @end

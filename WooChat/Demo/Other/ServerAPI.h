@@ -22,7 +22,7 @@ typedef void(^ServerBlock)(NSDictionary *resultDict);
 
 - (void)upLoadFileWithName:(NSString *)name WithDic:(NSMutableDictionary *)dic key:(NSString *)key
                  success:(void(^)(NSDictionary *resultDict))success failure:(void(^)())failure;
-
+- (void)translateWithText:(NSString *)text toLang:(NSString *)lang success:(void(^)(NSString *result))success failure:(void(^)())failure;
 
 
 @end

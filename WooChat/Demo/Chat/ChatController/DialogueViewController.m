@@ -25,6 +25,7 @@
 #import "ChatInfoViewController.h"
 #import "ChatAudio2TextViewController.h"
 #import "ShowAlbumViewController.h"
+#import <AVFoundation/AVSpeechSynthesis.h>
 #define weakify(var)   __weak typeof(var) weakSelf = var
 #define strongify(var) __strong typeof(var) strongSelf = var
 @interface DialogueViewController ()<UITextViewDelegate,UITableViewDelegate,UITableViewDataSource,NIMChatManagerDelegate,NIMMediaManagerDelgate, MyAudioTableViewCellDelegate, OtherAudioTableViewCellDelegate, MyImageTableViewCellDelegate, OtherImageTableViewCellDelegate>
@@ -38,9 +39,15 @@
 //@property CGFloat tempVolume;
 //当前语音录制时间
 @property float currentTime;
+
 @end
 
 @implementation DialogueViewController
+{
+   
+   AVSpeechSynthesizer*av;
+   
+}
 - (void)viewWillAppear:(BOOL)animated{
    [super viewWillAppear:animated];
    [self creatBackGround];
@@ -143,6 +150,7 @@
 //      NSLog(@"%d---isplay", message.isPlayed);
       if (message.messageType == NIMMessageTypeText) {
          model.text = message.text;
+         
       }else if (message.messageType == NIMMessageTypeImage){
          NIMImageObject *imageObject = [[NIMImageObject alloc]init];
          imageObject = (NIMImageObject *)message.messageObject;
@@ -419,7 +427,6 @@
          
 }
 
-
 #pragma mark - tableViewDelegate and datasource
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
     return _dataSource.count;
@@ -629,16 +636,73 @@
    [cell updateConstraintsIfNeeded];
    UILongPressGestureRecognizer *longPress = [[UILongPressGestureRecognizer alloc] initWithTarget:self action:@selector(longPressCell:)];
    [cell addGestureRecognizer:longPress];
+   UITapGestureRecognizer *tapText = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(readText:)];
+   [cell addGestureRecognizer:tapText];
    cell.userInteractionEnabled = YES;
+   
    return cell;
 }
+
+#pragma mark - 读文字
+-(void)readText:(UITapGestureRecognizer *)tap{
+   
+//      
+//      if([av isPaused]) {
+//         
+//         //如果暂停则恢复，会从暂停的地方继续
+//         
+//         [av continueSpeaking];
+
+   
+         //初始化对象
+   if ([tap.view isKindOfClass:[OthersMessageViewCell class]] || [tap.view isKindOfClass:[MyMessageViewCell class]]) {
+      if ([tap.view isKindOfClass:[OthersMessageViewCell class]]) {
+         OthersMessageViewCell *cell = (OthersMessageViewCell *)tap.view;
+         self.modelForMenu = cell.model;
+      }else{
+         MyMessageViewCell *cell = (MyMessageViewCell *)tap.view;
+         self.modelForMenu = cell.model;
+      }
+      
+   }
+         av= [[AVSpeechSynthesizer alloc]init];
+         AVSpeechUtterance*utterance = [[AVSpeechUtterance alloc]initWithString:self.modelForMenu.text];//需要转换的文字
+         
+         utterance.rate=0.5;// 设置语速，范围0-1，注意0最慢，1最快；AVSpeechUtteranceMinimumSpeechRate最慢，AVSpeechUtteranceMaximumSpeechRate最快
+         
+         AVSpeechSynthesisVoice*voice = [AVSpeechSynthesisVoice voiceWithLanguage:[UserInfo sharedInstance].voice];//设置发音，这是中文普通话
+   NSLog(@"%@--voice", [UserInfo sharedInstance].voice);
+         utterance.voice= voice;
+         
+         [av speakUtterance:utterance];//开始
+         
+//         sender.selected=!sender.selected;
+         
+//      }
+//      
+//   }else{
+//      
+//      //[av stopSpeakingAtBoundary:AVSpeechBoundaryWord];//感觉效果一样，对应代理>>>取消
+//      
+//      [avpauseSpeakingAtBoundary:AVSpeechBoundaryWord];//暂停
+//      
+//      sender.selected=!sender.selected;
+//      
+//   }
+   
+   //[utterance release];//需要关闭ARC
+   
+   //[av release];
+   
+}
+
 
 #pragma mark - Action-UIMenuController
 - (void)longPressCell:(UILongPressGestureRecognizer *)longPress{
    
    if ([longPress state] == UIGestureRecognizerStateBegan) {
       //文字
-      if ([longPress.view isKindOfClass:[MyMessageViewCell class]]) {
+      if ([longPress.view isKindOfClass:[MyMessageViewCell class]] || [longPress.view isKindOfClass:[OthersMessageViewCell class]]) {
          MyMessageViewCell *cell = (MyMessageViewCell *)longPress.view;
          self.modelForMenu = cell.model;
          NSMutableArray *items = [NSMutableArray array];
@@ -660,7 +724,7 @@
             [controller setMenuVisible:YES animated:YES];
             [controller update];
          }
-      }else if ([longPress.view isKindOfClass:[MyAudioTableViewCell class]]){
+      }else if ([longPress.view isKindOfClass:[MyAudioTableViewCell class]] || [longPress.view isKindOfClass:[OtherAudioTableViewCell class]]){
          //语音
          if ([longPress.view isKindOfClass:[MyAudioTableViewCell class]]) {
             MyAudioTableViewCell *cell = (MyAudioTableViewCell *)longPress.view;
@@ -682,7 +746,7 @@
                [controller update];
             }
          }
-      }else if ([longPress.view isKindOfClass:[MyImageTableViewCell class]]) {
+      }else if ([longPress.view isKindOfClass:[MyImageTableViewCell class]] || [longPress.view isKindOfClass:[OtherImageTableViewCell class]]) {
          MyImageTableViewCell *cell = (MyImageTableViewCell *)longPress.view;
          self.modelForMenu = cell.model;
          NSMutableArray *items = [NSMutableArray array];
@@ -1105,7 +1169,16 @@ didCompleteWithError:(NSError *)error{
       model.message = message;
       switch (message.messageType) {
          case NIMMessageTypeText:{
-            model.text = message.text;
+//            model.text = message.text;
+            NSLog(@"%@--lang", [UserInfo sharedInstance].lang);
+
+            [[ServerAPI sharedAPI] translateWithText:message.text toLang:[UserInfo sharedInstance].lang success:^(NSString *result) {
+               model.text = result;
+               [self reloadTableView];
+            } failure:^{
+               model.text = message.text;
+               [self reloadTableView];
+            }];
             NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
             NSDate *time = [NSDate dateWithTimeIntervalSince1970:message.timestamp];
             [dateFormatter setDateFormat:@"HH:mm"];
@@ -1113,8 +1186,9 @@ didCompleteWithError:(NSError *)error{
             model.messageType = NIMMessageTypeText;
             model.myOrOther = @"other";
             [_dataSource addObject:model];
+            
 //            [self reloadTableView];
-            [self.tableView reloadData];
+//            [self.tableView reloadData];
          }
          break;
          case NIMMessageTypeAudio:{

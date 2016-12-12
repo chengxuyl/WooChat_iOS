@@ -18,5 +18,7 @@
 @property (nonatomic, strong) NSString *passWord;
 @property (nonatomic, strong) NSString *dataBasePath;
 @property (nonatomic, strong) NSString *imToken;
+@property (nonatomic, strong) NSString *lang;
+@property (nonatomic, strong) NSString *voice;
 - (void)clear;
 @end

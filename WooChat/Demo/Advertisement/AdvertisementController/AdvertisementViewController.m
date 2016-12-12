@@ -20,6 +20,7 @@
 #import "AdvertisementModel.h"
 #import "AdvertisementHTMLViewController.h"
 #import <Reachability.h>
+
 @interface AdvertisementViewController ()<UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSMutableArray *dataArr;
@@ -33,6 +34,10 @@
     [self createNavigation];
     [self createPage];
     self.dataArr = [NSMutableArray array];
+    
+    
+
+    
 //    Reachability *reach = [[Reachability alloc] init];
 //    [reach startNotifier];
 //    NSLog(@"%ld----", [reach currentReachabilityStatus]);
@@ -49,6 +54,7 @@
         [self.tableView reloadData];
     }];
 }
+
 #pragma mark - 导航条
 -(void)createNavigation{
     self.navigationItem.title = @"MoaTong";

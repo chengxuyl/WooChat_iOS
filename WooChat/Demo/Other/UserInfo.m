@@ -16,6 +16,8 @@
 @synthesize imToken = _imToken;
 @synthesize nickName = _nickName;
 @synthesize icon = _icon;
+@synthesize lang = _lang;
+@synthesize voice = _voice;
 + (instancetype)sharedInstance
 {
     static id instance = nil;
@@ -33,6 +35,8 @@
     self.imId = @"";
     self.nickName = @"";
     self.uid = @"";
+    self.lang = @"";
+    self.voice = @"";
     NSFileManager *fileManager = [NSFileManager defaultManager];
     [fileManager removeItemAtPath:self.dataBasePath error:nil];
 }
@@ -92,6 +96,38 @@
         _icon = icon;
         [[NSUserDefaults standardUserDefaults] setObject:icon forKey:@"icon"];
         [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
+
+- (void)setLang:(NSString *)lang{
+    if (_lang != lang) {
+        _lang = lang;
+        [[NSUserDefaults standardUserDefaults] setObject:lang forKey:@"lang"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
+
+- (void)setVoice:(NSString *)voice{
+    if (_voice != voice) {
+        _voice = voice;
+        [[NSUserDefaults standardUserDefaults] setObject:voice forKey:@"voice"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
+
+- (NSString *)lang{
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"lang"] length] > 0) {
+        return [[NSUserDefaults standardUserDefaults] objectForKey:@"lang"];
+    }else{
+        return _lang;
+    }
+}
+
+- (NSString *)voice{
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"voice"] length] > 0) {
+        return [[NSUserDefaults standardUserDefaults] objectForKey:@"voice"];
+    }else{
+        return _voice;
     }
 }
 

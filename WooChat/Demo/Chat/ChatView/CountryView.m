@@ -51,6 +51,14 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 50.0f;
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
+    [UserInfo sharedInstance].voice = [[ServerAPI sharedAPI].countryList[indexPath.row] objectForKey:@"voice"];
+    [UserInfo sharedInstance].lang = [[ServerAPI sharedAPI].countryList[indexPath.row] objectForKey:@"lang"];
+    NSLog(@"%@----%@", [UserInfo sharedInstance].voice, [UserInfo sharedInstance].lang);
+    self.hidden  = YES;
+}
+
 - (UITableView *)tableView{
     if (!_tableView) {
         _tableView = [[UITableView alloc] initWithFrame:self.bounds style:(UITableViewStylePlain)];
