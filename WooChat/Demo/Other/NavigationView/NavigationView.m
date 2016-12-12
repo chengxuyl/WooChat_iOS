@@ -17,6 +17,8 @@
         _headImageBtn = [[UIButton alloc]initWithFrame:CGRectMake(4, 4, 36, 36)];
 //        [_headImageBtn setBackgroundColor:[UIColor redColor]];
         [_headImageBtn setBackgroundImage:[UIImage imageNamed:@"originalportrit"] forState:(UIControlStateNormal)];
+        
+//        [_headImageBtn.imageView sd_setImageWithURL:[NSURL URLWithString:[[UserInfo sharedInstance].icon stringByReplacingOccurrencesOfString:@"8081" withString:@"8080"]] placeholderImage:[UIImage imageNamed:@"chat"]];
         _headImageBtn.layer.cornerRadius = 34/2.0;
         _headImageBtn.layer.masksToBounds = YES;
         

@@ -271,6 +271,7 @@
 		18F26A801D7588EE00E87565 /* DialogueModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F26A7F1D7588EE00E87565 /* DialogueModel.m */; };
 		18F384B71D80F42E00D68B83 /* MyAudioTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F384B51D80F42E00D68B83 /* MyAudioTableViewCell.m */; };
 		18F384B81D80F42E00D68B83 /* MyAudioTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18F384B61D80F42E00D68B83 /* MyAudioTableViewCell.xib */; };
+		18F6E6391DFE367D00C043A8 /* AlbumCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 18F6E6381DFE367D00C043A8 /* AlbumCollectionViewCell.m */; };
 		18FAF4591DF684A700F5BDD3 /* btn_0.png in Resources */ = {isa = PBXBuildFile; fileRef = 18FAF4491DF684A700F5BDD3 /* btn_0.png */; };
 		18FAF45A1DF684A700F5BDD3 /* btn_1.png in Resources */ = {isa = PBXBuildFile; fileRef = 18FAF44A1DF684A700F5BDD3 /* btn_1.png */; };
 		18FAF45B1DF684A700F5BDD3 /* btn_2.png in Resources */ = {isa = PBXBuildFile; fileRef = 18FAF44B1DF684A700F5BDD3 /* btn_2.png */; };
@@ -709,6 +710,8 @@
 		18F384B41D80F42E00D68B83 /* MyAudioTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyAudioTableViewCell.h; sourceTree = "<group>"; };
 		18F384B51D80F42E00D68B83 /* MyAudioTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyAudioTableViewCell.m; sourceTree = "<group>"; };
 		18F384B61D80F42E00D68B83 /* MyAudioTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MyAudioTableViewCell.xib; sourceTree = "<group>"; };
+		18F6E6371DFE367D00C043A8 /* AlbumCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AlbumCollectionViewCell.h; sourceTree = "<group>"; };
+		18F6E6381DFE367D00C043A8 /* AlbumCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AlbumCollectionViewCell.m; sourceTree = "<group>"; };
 		18FAF4491DF684A700F5BDD3 /* btn_0.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_0.png; sourceTree = "<group>"; };
 		18FAF44A1DF684A700F5BDD3 /* btn_1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_1.png; sourceTree = "<group>"; };
 		18FAF44B1DF684A700F5BDD3 /* btn_2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = btn_2.png; sourceTree = "<group>"; };
@@ -1595,6 +1598,8 @@
 				1856CDF71DF65B2D00B4B3AB /* CountryView.m */,
 				1856CDF91DF6655700B4B3AB /* CountryTableViewCell.h */,
 				1856CDFA1DF6655700B4B3AB /* CountryTableViewCell.m */,
+				18F6E6371DFE367D00C043A8 /* AlbumCollectionViewCell.h */,
+				18F6E6381DFE367D00C043A8 /* AlbumCollectionViewCell.m */,
 			);
 			path = ChatView;
 			sourceTree = "<group>";
@@ -2651,6 +2656,7 @@
 				18D92FD41D6C3715009B1775 /* ToolsbarView.m in Sources */,
 				18EF955A1D6AE97700493B9E /* RegisterViewController.m in Sources */,
 				18B1735B1DF9075B00837AA2 /* MJRefreshFooterView.m in Sources */,
+				18F6E6391DFE367D00C043A8 /* AlbumCollectionViewCell.m in Sources */,
 				1856CDF81DF65B2E00B4B3AB /* CountryView.m in Sources */,
 				18FB57FC1D70392600E6DABF /* MoreView.m in Sources */,
 				18B1735D1DF9075B00837AA2 /* UIScrollView+MJExtension.m in Sources */,

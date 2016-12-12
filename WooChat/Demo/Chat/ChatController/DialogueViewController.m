@@ -404,6 +404,10 @@
          model.myOrOther = @"my";
       }else{
          model.myOrOther = @"other";
+//         FMDatabase *db = [[FMDatabase alloc] initWithPath:[UserInfo sharedInstance].dataBasePath];
+//         [db open];
+//         NSString *url = [db stringForQuery:@"SELECT icon FROM PersonList WHERE mobile = ?",[message.remoteExt objectForKey:@"mobile"]];
+//                          [NSURL URLWithString:[url stringByReplacingOccurrencesOfString:@"8081" withString:@"8080"]];
       }
       [_dataSource insertObject:model atIndex:i];
       

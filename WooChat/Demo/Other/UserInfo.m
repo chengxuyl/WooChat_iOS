@@ -15,6 +15,7 @@
 @synthesize imId = _imId;
 @synthesize imToken = _imToken;
 @synthesize nickName = _nickName;
+@synthesize icon = _icon;
 + (instancetype)sharedInstance
 {
     static id instance = nil;
@@ -86,6 +87,21 @@
     }
 }
 
+- (void)setIcon:(NSString *)icon{
+    if (_icon != icon) {
+        _icon = icon;
+        [[NSUserDefaults standardUserDefaults] setObject:icon forKey:@"icon"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
+
+- (NSString *)icon{
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"icon"] length] > 0) {
+        return [[NSUserDefaults standardUserDefaults] objectForKey:@"icon"];
+    }else{
+        return _icon;
+    }
+}
 - (NSString *)nickName{
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"nickName"] length] > 0) {
         return [[NSUserDefaults standardUserDefaults] objectForKey:@"nickName"];

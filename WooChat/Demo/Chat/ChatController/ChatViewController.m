@@ -158,7 +158,9 @@
             cell.nameLabel.text = [users lastObject].userInfo.nickName;
         }];
     }
-    [cell.iconImageView sd_setImageWithURL:[NSURL URLWithString:[db stringForQuery:@"SELECT icon FROM PersonList WHERE imId = ?",recent.session.sessionId]] placeholderImage:[UIImage imageNamed:@"chat"]] ;
+    NSString *url = [db stringForQuery:@"SELECT icon FROM PersonList WHERE imId = ?",recent.session.sessionId];
+    
+    [cell.iconImageView sd_setImageWithURL:[NSURL URLWithString:[url stringByReplacingOccurrencesOfString:@"8081" withString:@"8080"]] placeholderImage:[UIImage imageNamed:@"chat"]];
     [db close];
 
     if (recent.unreadCount == 0) {

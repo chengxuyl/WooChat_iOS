@@ -7,7 +7,7 @@
 //
 
 #import "ShowAlbumViewController.h"
-
+#import "AlbumCollectionViewCell.h"
 @interface ShowAlbumViewController ()<UICollectionViewDelegate, UICollectionViewDataSource>
 @property (nonatomic, strong) NSMutableArray *imagesArr;
 @property (nonatomic, strong) UICollectionView *collectionView;
@@ -57,12 +57,11 @@
     UICollectionView * collect = [[UICollectionView alloc]initWithFrame:self.view.bounds collectionViewLayout:layout];
     collect.backgroundColor = [UIColor blackColor];
     //注册item类型 这里使用系统的类型
-    [collect registerClass:[UICollectionViewCell class] forCellWithReuseIdentifier:@"images"];
+    [collect registerClass:[AlbumCollectionViewCell class] forCellWithReuseIdentifier:@"images"];
     //代理设置
     collect.delegate=self;
     collect.dataSource=self;
     collect.pagingEnabled = YES;
-    
     [collect scrollToItemAtIndexPath:[NSIndexPath indexPathForRow:self.tempInt inSection:0] atScrollPosition:UICollectionViewScrollPositionCenteredHorizontally animated:YES];
     [self.view addSubview:collect];
 }
@@ -78,30 +77,37 @@
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath{
-    UICollectionViewCell * cell  = [collectionView dequeueReusableCellWithReuseIdentifier:@"images" forIndexPath:indexPath];
+    AlbumCollectionViewCell * cell  = [collectionView dequeueReusableCellWithReuseIdentifier:@"images" forIndexPath:indexPath];
     NIMMessage *message = self.imagesArr[indexPath.item];
     NIMImageObject *imageObject = [[NIMImageObject alloc]init];
     imageObject = (NIMImageObject *)message.messageObject;
-    UIImageView *imageView = [[UIImageView alloc] init];
+    cell.imageObject = imageObject;
     if (imageObject.size.width > SCREEN_WIDTH && imageObject.size.height < SCREEN_HEIGHT) {
-        imageView.frame = CGRectMake(0, 0, SCREEN_WIDTH, (SCREEN_WIDTH * imageObject.size.height) / imageObject.size.width);
+        cell.albumImageView.frame = CGRectMake(0, 0, SCREEN_WIDTH, (SCREEN_WIDTH * imageObject.size.height) / imageObject.size.width);
     }else if (imageObject.size.height > SCREEN_HEIGHT && imageObject.size.width < SCREEN_WIDTH){
-        imageView.frame = CGRectMake(0, 0, (imageObject.size.width * SCREEN_HEIGHT) / imageObject.size.height, SCREEN_HEIGHT);
+        cell.albumImageView.frame = CGRectMake(0, 0, (imageObject.size.width * SCREEN_HEIGHT) / imageObject.size.height, SCREEN_HEIGHT);
     }
     else if (imageObject.size.height > SCREEN_HEIGHT && imageObject.size.width > SCREEN_WIDTH){
         if (imageObject.size.height > imageObject.size.width) {
-            imageView.frame = CGRectMake(0, 0, (imageObject.size.width * SCREEN_HEIGHT) / imageObject.size.height, SCREEN_HEIGHT);
+            if ((imageObject.size.width * SCREEN_HEIGHT) / imageObject.size.height > SCREEN_WIDTH) {
+                cell.albumImageView.frame = CGRectMake(0, 0, SCREEN_WIDTH, (SCREEN_WIDTH * SCREEN_HEIGHT) / ((imageObject.size.width * SCREEN_HEIGHT) / imageObject.size.height));
+            }else{
+                cell.albumImageView.frame = CGRectMake(0, 0, (imageObject.size.width * SCREEN_HEIGHT) / imageObject.size.height, SCREEN_HEIGHT);
+            }
         }else{
-            imageView.frame = CGRectMake(0, 0, SCREEN_WIDTH, (SCREEN_WIDTH * imageObject.size.height) / imageObject.size.width);
+            if ((SCREEN_WIDTH * imageObject.size.height) / imageObject.size.width > SCREEN_HEIGHT) {
+                cell.albumImageView.frame = CGRectMake(0, 0,(SCREEN_WIDTH * ((SCREEN_WIDTH * imageObject.size.height) / imageObject.size.width)) / SCREEN_WIDTH, SCREEN_HEIGHT);
+            }else{
+                
+                cell.albumImageView.frame = CGRectMake(0, 0, SCREEN_WIDTH, (SCREEN_WIDTH * imageObject.size.height) / imageObject.size.width);
+            }
         }
     }
     else{
-        imageView.frame = CGRectMake(0, 0, imageObject.size.width, imageObject.size.height);
+        cell.albumImageView.frame = CGRectMake(0, 0, imageObject.size.width, imageObject.size.height);
     }
-    imageView.center = self.view.center;
-    [imageView sd_setImageWithURL:[NSURL URLWithString:imageObject.url]];
-//    UIImageView *imageView = [[UIImageView alloc] initWithImage:[UIImage imageWithContentsOfFile:imageObject.thumbPath]];
-    [cell addSubview:imageView];
+    cell.albumImageView.center = self.view.center;
+
     return cell;
 }
 

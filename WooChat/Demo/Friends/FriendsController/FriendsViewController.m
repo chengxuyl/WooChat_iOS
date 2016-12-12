@@ -62,7 +62,7 @@
 }   
 #pragma mark - 导航条
 -(void)createNavigation{
-    self.navigationItem.title = @"MoaTong";
+    self.navigationItem.title = @"WooChat";
     [self.navigationController.navigationBar setBarTintColor:[UIColor colorWithRed:0/255.0 green:180/255.0 blue:255/255.0 alpha:1.0]];
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor whiteColor],NSForegroundColorAttributeName,nil]];
     
