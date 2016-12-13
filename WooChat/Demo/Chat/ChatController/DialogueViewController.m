@@ -149,9 +149,33 @@
 //      model.isPlay = message.isPlayed;
 //      NSLog(@"%d---isplay", message.isPlayed);
       if (message.messageType == NIMMessageTypeText) {
-         model.text = message.text;
-         NSLog(@"%@---translate", [message.localExt objectForKey:@"translate"]);
-//         model.text = [message.localExt objectForKey:@"translate"];
+         if (message.isReceivedMsg) {
+            if ([message.localExt objectForKey:@"translate"]) {
+               model.text = [NSString stringWithFormat:@"%@\n%@", message.text, [message.localExt objectForKey:@"translate"]];
+            }else{
+               model.text = message.text;
+               [[ServerAPI sharedAPI] translateWithText:message.text toLang:[UserInfo sharedInstance].lang success:^(NSString *result) {
+                  NSDictionary *dic = [NSDictionary dictionaryWithObject:result forKey:@"translate"];
+                  message.localExt = dic;
+                  //更新本地消息 把翻译后的文字存到本地
+                  if (self.friendIn) {
+                     [[NIMSDK sharedSDK].conversationManager updateMessage:message forSession:self.session completion:nil];
+                  }else{
+                     [[NIMSDK sharedSDK].conversationManager updateMessage:message forSession:self.recent.session completion:nil];
+                  }
+                  if ([message.localExt objectForKey:@"translate"]) {
+                     model.text = [NSString stringWithFormat:@"%@\n%@", message.text, [message.localExt objectForKey:@"translate"]];
+                  }else{
+                     model.text = message.text;
+                  }
+                  [self reloadTableView];
+               } failure:^{
+               }];
+            }
+         }else{
+            model.text = [message.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+//            model.text = message.text;
+         }
          
       }else if (message.messageType == NIMMessageTypeImage){
          NIMImageObject *imageObject = [[NIMImageObject alloc]init];
@@ -386,7 +410,33 @@
       //      model.isPlay = message.isPlayed;
       //      NSLog(@"%d---isplay", message.isPlayed);
       if (message.messageType == NIMMessageTypeText) {
-         model.text = message.text;
+         if (message.isReceivedMsg) {
+            if ([message.localExt objectForKey:@"translate"]) {
+               model.text = [NSString stringWithFormat:@"%@\n%@", message.text, [message.localExt objectForKey:@"translate"]];
+            }else{
+               model.text = message.text;
+               [[ServerAPI sharedAPI] translateWithText:message.text toLang:[UserInfo sharedInstance].lang success:^(NSString *result) {
+                  NSDictionary *dic = [NSDictionary dictionaryWithObject:result forKey:@"translate"];
+                  message.localExt = dic;
+                  //更新本地消息 把翻译后的文字存到本地
+                  if (self.friendIn) {
+                     [[NIMSDK sharedSDK].conversationManager updateMessage:message forSession:self.session completion:nil];
+                  }else{
+                     [[NIMSDK sharedSDK].conversationManager updateMessage:message forSession:self.recent.session completion:nil];
+                  }
+                  if ([message.localExt objectForKey:@"translate"]) {
+                     model.text = [NSString stringWithFormat:@"%@\n%@", message.text, [message.localExt objectForKey:@"translate"]];
+                  }else{
+                     model.text = message.text;
+                  }
+                  [self reloadTableView];
+               } failure:^{
+               }];
+            }
+         }else{
+            model.text = [message.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            //            model.text = message.text;
+         }
       }else if (message.messageType == NIMMessageTypeImage){
          NIMImageObject *imageObject = [[NIMImageObject alloc]init];
          imageObject = (NIMImageObject *)message.messageObject;
@@ -501,7 +551,12 @@
          }else{
             OthersMessageViewCell *otherCell = [tableView dequeueReusableCellWithIdentifier:@"OthersMessageViewCell" forIndexPath:indexPath];
             otherCell.model = model;
-            otherCell.messageLabel.text = model.text;
+//            otherCell.messageLabel.text = model.text;
+            if (model.text) {
+               otherCell.messageLabel.attributedText = [self attributedWithString:model.text text:model.message.text];
+            }else{
+               otherCell.messageLabel.text = model.text;
+            }
             if (indexPath.row -1 >= 0) {
                model1 = _dataSource[indexPath.row-1];
                if ([model1.time isEqualToString:model.time]) {
@@ -645,6 +700,14 @@
    return cell;
 }
 
+#pragma mark - private method
+- (NSMutableAttributedString *)attributedWithString:(NSString *)string text:(NSString *)text{
+   NSMutableAttributedString *str = [[NSMutableAttributedString alloc] initWithString:string];
+   [str addAttribute:NSForegroundColorAttributeName value:MYCOLOR_BLUE range:NSMakeRange(text.length, str.length - text.length)];
+   [str addAttribute:NSForegroundColorAttributeName value:[UIColor blackColor] range:NSMakeRange(0, text.length)];
+   return str;
+}
+
 #pragma mark - 读文字
 -(void)readText:(UITapGestureRecognizer *)tap{
    
@@ -657,27 +720,22 @@
 
    
          //初始化对象
-   if ([tap.view isKindOfClass:[OthersMessageViewCell class]] || [tap.view isKindOfClass:[MyMessageViewCell class]]) {
-      if ([tap.view isKindOfClass:[OthersMessageViewCell class]]) {
+   if ([tap.view isKindOfClass:[OthersMessageViewCell class]]) {
          OthersMessageViewCell *cell = (OthersMessageViewCell *)tap.view;
          self.modelForMenu = cell.model;
-      }else{
-         MyMessageViewCell *cell = (MyMessageViewCell *)tap.view;
-         self.modelForMenu = cell.model;
-      }
       
+      av= [[AVSpeechSynthesizer alloc]init];
+      AVSpeechUtterance*utterance = [[AVSpeechUtterance alloc]initWithString:[self.modelForMenu.message.localExt objectForKey:@"translate"]];//需要转换的文字
+      
+      utterance.rate=0.5;// 设置语速，范围0-1，注意0最慢，1最快；AVSpeechUtteranceMinimumSpeechRate最慢，AVSpeechUtteranceMaximumSpeechRate最快
+      
+      AVSpeechSynthesisVoice*voice = [AVSpeechSynthesisVoice voiceWithLanguage:[UserInfo sharedInstance].voice];//设置发音，这是中文普通话
+      NSLog(@"%@--voice", [UserInfo sharedInstance].voice);
+      utterance.voice= voice;
+      
+      [av speakUtterance:utterance];//开始
    }
-         av= [[AVSpeechSynthesizer alloc]init];
-         AVSpeechUtterance*utterance = [[AVSpeechUtterance alloc]initWithString:self.modelForMenu.text];//需要转换的文字
-         
-         utterance.rate=0.5;// 设置语速，范围0-1，注意0最慢，1最快；AVSpeechUtteranceMinimumSpeechRate最慢，AVSpeechUtteranceMaximumSpeechRate最快
-         
-         AVSpeechSynthesisVoice*voice = [AVSpeechSynthesisVoice voiceWithLanguage:[UserInfo sharedInstance].voice];//设置发音，这是中文普通话
-   NSLog(@"%@--voice", [UserInfo sharedInstance].voice);
-         utterance.voice= voice;
-         
-         [av speakUtterance:utterance];//开始
-         
+   
 //         sender.selected=!sender.selected;
          
 //      }
@@ -1087,32 +1145,35 @@ didCompleteWithError:(NSError *)error{
    UITextView *textView = [self.view viewWithTag:4];
    NIMMessage *message = [[NIMMessage alloc] init];
    message.remoteExt = @{@"mobile": [UserInfo sharedInstance].mobile};
-   message.text = textView.text;
+   message.text = [textView.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
    message.timestamp = [[NSDate date] timeIntervalSince1970];
    textView.text = @"";
    
    NSString *IMid = [NSString new];
    IMid = self.mod.imId;
-
-   //构造会话
-   NIMSession *session = [NIMSession session:IMid type:NIMSessionTypeP2P];
-   
-   //发送消息
-   [[NIMSDK sharedSDK].chatManager sendMessage:message toSession:session error:nil];
-   
-   //表格视图刷新显示本条消息
-   DialogueModel *model = [[DialogueModel alloc]init];
-   model.message = message;
-   NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-   NSDate *time = [NSDate dateWithTimeIntervalSince1970:message.timestamp];
-   [dateFormatter setDateFormat:@"HH:mm"];
-   model.time = [dateFormatter stringFromDate:time];
-   model.messageType = NIMMessageTypeText;
-   model.text = message.text;
-   model.myOrOther = @"my";
-   
-   [_dataSource addObject:model];
-   [self reloadTableView];
+   //不能发送空消息
+   if (message.text.length) {
+      
+      //构造会话
+      NIMSession *session = [NIMSession session:IMid type:NIMSessionTypeP2P];
+      
+      //发送消息
+      [[NIMSDK sharedSDK].chatManager sendMessage:message toSession:session error:nil];
+      
+      //表格视图刷新显示本条消息
+      DialogueModel *model = [[DialogueModel alloc]init];
+      model.message = message;
+      NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+      NSDate *time = [NSDate dateWithTimeIntervalSince1970:message.timestamp];
+      [dateFormatter setDateFormat:@"HH:mm"];
+      model.time = [dateFormatter stringFromDate:time];
+      model.messageType = NIMMessageTypeText;
+      model.text = message.text;
+      model.myOrOther = @"my";
+      
+      [_dataSource addObject:model];
+      [self reloadTableView];
+   }
 }
 #pragma mark - 已读回执
 - (void)onRecvMessageReceipt:(NIMMessageReceipt *)receipt{
@@ -1183,7 +1244,11 @@ didCompleteWithError:(NSError *)error{
                }else{
                   [[NIMSDK sharedSDK].conversationManager updateMessage:message forSession:self.recent.session completion:nil];
                }
-               model.text = result;
+               if ([message.localExt objectForKey:@"translate"]) {
+                  model.text = [NSString stringWithFormat:@"%@\n%@", message.text, [message.localExt objectForKey:@"translate"]];
+               }else{
+                  model.text = message.text;
+               }
                [self reloadTableView];
             } failure:^{
                model.text = message.text;
