@@ -150,6 +150,8 @@
 //      NSLog(@"%d---isplay", message.isPlayed);
       if (message.messageType == NIMMessageTypeText) {
          model.text = message.text;
+         NSLog(@"%@---translate", [message.localExt objectForKey:@"translate"]);
+//         model.text = [message.localExt objectForKey:@"translate"];
          
       }else if (message.messageType == NIMMessageTypeImage){
          NIMImageObject *imageObject = [[NIMImageObject alloc]init];
@@ -1171,8 +1173,16 @@ didCompleteWithError:(NSError *)error{
          case NIMMessageTypeText:{
 //            model.text = message.text;
             NSLog(@"%@--lang", [UserInfo sharedInstance].lang);
-
+            /* 翻译 */
             [[ServerAPI sharedAPI] translateWithText:message.text toLang:[UserInfo sharedInstance].lang success:^(NSString *result) {
+               NSDictionary *dic = [NSDictionary dictionaryWithObject:result forKey:@"translate"];
+               message.localExt = dic;
+               //更新本地消息 把翻译后的文字存到本地
+               if (self.friendIn) {
+                  [[NIMSDK sharedSDK].conversationManager updateMessage:message forSession:self.session completion:nil];
+               }else{
+                  [[NIMSDK sharedSDK].conversationManager updateMessage:message forSession:self.recent.session completion:nil];
+               }
                model.text = result;
                [self reloadTableView];
             } failure:^{
