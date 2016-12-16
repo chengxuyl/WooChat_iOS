@@ -20,26 +20,35 @@
                 <rect key="frame" x="0.0" y="0.0" width="457" height="171"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1" verticalCompressionResistancePriority="1" misplaced="YES" image="enter.png" translatesAutoresizingMaskIntoConstraints="NO" id="Yhi-IT-757">
-                        <rect key="frame" x="72" y="61" width="257" height="68"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="1" verticalCompressionResistancePriority="1" image="enter.png" translatesAutoresizingMaskIntoConstraints="NO" id="Yhi-IT-757">
+                        <rect key="frame" x="58" y="51" width="97" height="104.5"/>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="245" translatesAutoresizingMaskIntoConstraints="NO" id="VYg-ph-JF5">
-                        <rect key="frame" x="78" y="70" width="245" height="50"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="245" translatesAutoresizingMaskIntoConstraints="NO" id="VYg-ph-JF5">
+                        <rect key="frame" x="78" y="61" width="42" height="84.5"/>
                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1iZ-g0-lRT">
-                        <rect key="frame" x="178" y="20" width="100" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1iZ-g0-lRT">
+                        <rect key="frame" x="211.5" y="25" width="33" height="16"/>
                         <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="chat_select.png" translatesAutoresizingMaskIntoConstraints="NO" id="cms-DK-ZL0">
-                        <rect key="frame" x="8" y="70" width="50" height="50"/>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="chat_select.png" translatesAutoresizingMaskIntoConstraints="NO" id="cms-DK-ZL0">
+                        <rect key="frame" x="8" y="51" width="50" height="50"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="cms-DK-ZL0" secondAttribute="height" multiplier="1:1" id="a2w-e3-0pP"/>
+                        </constraints>
+                    </imageView>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="translate_listener_normal.png" translatesAutoresizingMaskIntoConstraints="NO" id="7rB-PJ-1DG">
+                        <rect key="frame" x="125" y="121" width="25" height="25"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="25" id="Y0G-RS-CuI"/>
+                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="25" id="YSh-ec-Ibi"/>
+                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="25" id="ZXm-uA-dv4"/>
+                            <constraint firstAttribute="height" constant="25" id="ckK-em-iL1"/>
                         </constraints>
                     </imageView>
                 </subviews>
@@ -53,10 +62,12 @@
                     <constraint firstItem="Yhi-IT-757" firstAttribute="top" secondItem="1iZ-g0-lRT" secondAttribute="bottom" constant="10" id="bTX-YD-AeE"/>
                     <constraint firstItem="Yhi-IT-757" firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="cms-DK-ZL0" secondAttribute="bottom" id="bsQ-cC-eRy"/>
                     <constraint firstItem="Yhi-IT-757" firstAttribute="bottom" secondItem="VYg-ph-JF5" secondAttribute="bottom" constant="10" id="eDl-Mh-ThX"/>
+                    <constraint firstItem="7rB-PJ-1DG" firstAttribute="trailing" secondItem="VYg-ph-JF5" secondAttribute="trailing" constant="30" id="fpF-6c-Igk"/>
                     <constraint firstAttribute="leadingMargin" secondItem="cms-DK-ZL0" secondAttribute="leading" id="h2g-8w-Vcu"/>
-                    <constraint firstItem="Yhi-IT-757" firstAttribute="trailing" secondItem="VYg-ph-JF5" secondAttribute="trailing" constant="10" id="kbg-66-W2N"/>
                     <constraint firstAttribute="bottomMargin" secondItem="VYg-ph-JF5" secondAttribute="bottom" constant="17" id="mfp-Xy-Tzy"/>
+                    <constraint firstItem="7rB-PJ-1DG" firstAttribute="bottom" secondItem="VYg-ph-JF5" secondAttribute="bottom" id="pje-xF-k6w"/>
                     <constraint firstItem="1iZ-g0-lRT" firstAttribute="centerX" secondItem="H2p-sc-9uM" secondAttribute="centerX" id="uFE-bY-3dF"/>
+                    <constraint firstItem="7rB-PJ-1DG" firstAttribute="trailing" secondItem="Yhi-IT-757" secondAttribute="trailing" constant="-5" id="vtl-cR-goX"/>
                     <constraint firstItem="cms-DK-ZL0" firstAttribute="top" secondItem="Yhi-IT-757" secondAttribute="top" id="wC8-6D-pY9"/>
                 </constraints>
             </tableViewCellContentView>
@@ -65,6 +76,7 @@
                 <outlet property="headImage" destination="cms-DK-ZL0" id="UGq-bt-sfV"/>
                 <outlet property="messageLabel" destination="VYg-ph-JF5" id="76r-qi-fMg"/>
                 <outlet property="timeLabel" destination="1iZ-g0-lRT" id="Dj9-Tr-4ZD"/>
+                <outlet property="voiceImage" destination="7rB-PJ-1DG" id="5Eh-YS-Jx8"/>
             </connections>
             <point key="canvasLocation" x="288.5" y="311.5"/>
         </tableViewCell>
@@ -72,5 +84,6 @@
     <resources>
         <image name="chat_select.png" width="180" height="180"/>
         <image name="enter.png" width="160" height="122"/>
+        <image name="translate_listener_normal.png" width="60" height="60"/>
     </resources>
 </document>

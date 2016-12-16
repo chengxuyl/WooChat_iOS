@@ -18,4 +18,5 @@
  *  删除会话时是不是也同时删除服务器会话 (防止漫游)
  */
 @property (nonatomic,assign)   BOOL autoRemoveRemoteSession;
+- (void)FriendsBtnPop;
 @end

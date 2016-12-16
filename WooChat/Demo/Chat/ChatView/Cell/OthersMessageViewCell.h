@@ -13,6 +13,9 @@
 @property (strong, nonatomic) IBOutlet UILabel *messageLabel;
 @property (strong, nonatomic) IBOutlet UIImageView *MessageLabelBKImage;
 @property (strong, nonatomic) IBOutlet UILabel *timeLabel;
+@property (strong, nonatomic) IBOutlet UIImageView *voiceImage;
+
+
 @property (nonatomic, strong) DialogueModel *model;
 - (void)removeTime;
 @end

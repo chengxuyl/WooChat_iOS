@@ -50,6 +50,7 @@
 - (void)setImageObject:(NIMImageObject *)imageObject{
     if (_imageObject != imageObject) {
         _imageObject = imageObject;
+        NSLog(@"%@---", imageObject.url);
         [self.albumImageView sd_setImageWithURL:[NSURL URLWithString:imageObject.url]];
     }
 }

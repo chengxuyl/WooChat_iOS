@@ -93,6 +93,7 @@
 #pragma mark - 点击事件
 //好友页面跳转
 - (void)FriendsBtnPop{
+    NSLog(@"zou");
     FriendsViewController *FriendsViewC = [[FriendsViewController alloc]init];
     UINavigationController *FriendsViewnc = [[UINavigationController alloc]initWithRootViewController:FriendsViewC];
     [ self presentViewController:FriendsViewnc animated: NO completion:nil];

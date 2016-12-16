@@ -154,23 +154,25 @@
                model.text = [NSString stringWithFormat:@"%@\n%@", message.text, [message.localExt objectForKey:@"translate"]];
             }else{
                model.text = message.text;
-               [[ServerAPI sharedAPI] translateWithText:message.text toLang:[UserInfo sharedInstance].lang success:^(NSString *result) {
-                  NSDictionary *dic = [NSDictionary dictionaryWithObject:result forKey:@"translate"];
-                  message.localExt = dic;
-                  //更新本地消息 把翻译后的文字存到本地
-                  if (self.friendIn) {
-                     [[NIMSDK sharedSDK].conversationManager updateMessage:message forSession:self.session completion:nil];
-                  }else{
-                     [[NIMSDK sharedSDK].conversationManager updateMessage:message forSession:self.recent.session completion:nil];
-                  }
-                  if ([message.localExt objectForKey:@"translate"]) {
-                     model.text = [NSString stringWithFormat:@"%@\n%@", message.text, [message.localExt objectForKey:@"translate"]];
-                  }else{
-                     model.text = message.text;
-                  }
-                  [self reloadTableView];
-               } failure:^{
-               }];
+               if ([UserInfo sharedInstance].lang) {
+                  [[ServerAPI sharedAPI] translateWithText:message.text toLang:[UserInfo sharedInstance].lang success:^(NSString *result) {
+                     NSDictionary *dic = [NSDictionary dictionaryWithObject:result forKey:@"translate"];
+                     message.localExt = dic;
+                     //更新本地消息 把翻译后的文字存到本地
+                     if (self.friendIn) {
+                        [[NIMSDK sharedSDK].conversationManager updateMessage:message forSession:self.session completion:nil];
+                     }else{
+                        [[NIMSDK sharedSDK].conversationManager updateMessage:message forSession:self.recent.session completion:nil];
+                     }
+                     if ([message.localExt objectForKey:@"translate"]) {
+                        model.text = [NSString stringWithFormat:@"%@\n%@", message.text, [message.localExt objectForKey:@"translate"]];
+                     }else{
+                        model.text = message.text;
+                     }
+                     [self reloadTableView];
+                  } failure:^{
+                  }];
+               }
             }
          }else{
             model.text = [message.text stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
@@ -551,6 +553,11 @@
          }else{
             OthersMessageViewCell *otherCell = [tableView dequeueReusableCellWithIdentifier:@"OthersMessageViewCell" forIndexPath:indexPath];
             otherCell.model = model;
+            if ([model.message.localExt objectForKey:@"translate"]) {
+               otherCell.voiceImage.hidden = NO;
+            }else{
+               otherCell.voiceImage.hidden = YES;
+            }
 //            otherCell.messageLabel.text = model.text;
             if (model.text) {
                otherCell.messageLabel.attributedText = [self attributedWithString:model.text text:model.message.text];
@@ -717,8 +724,6 @@
 //         //如果暂停则恢复，会从暂停的地方继续
 //         
 //         [av continueSpeaking];
-
-   
          //初始化对象
    if ([tap.view isKindOfClass:[OthersMessageViewCell class]]) {
          OthersMessageViewCell *cell = (OthersMessageViewCell *)tap.view;
@@ -750,9 +755,6 @@
 //      
 //   }
    
-   //[utterance release];//需要关闭ARC
-   
-   //[av release];
    
 }
 
@@ -1232,8 +1234,15 @@ didCompleteWithError:(NSError *)error{
       model.message = message;
       switch (message.messageType) {
          case NIMMessageTypeText:{
-//            model.text = message.text;
+            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+            NSDate *time = [NSDate dateWithTimeIntervalSince1970:message.timestamp];
+            [dateFormatter setDateFormat:@"HH:mm"];
+            model.time = [dateFormatter stringFromDate:time];
+            model.messageType = NIMMessageTypeText;
+            model.myOrOther = @"other";
+            [_dataSource addObject:model];
             NSLog(@"%@--lang", [UserInfo sharedInstance].lang);
+            if ([UserInfo sharedInstance].lang.length) {
             /* 翻译 */
             [[ServerAPI sharedAPI] translateWithText:message.text toLang:[UserInfo sharedInstance].lang success:^(NSString *result) {
                NSDictionary *dic = [NSDictionary dictionaryWithObject:result forKey:@"translate"];
@@ -1251,16 +1260,12 @@ didCompleteWithError:(NSError *)error{
                }
                [self reloadTableView];
             } failure:^{
+               
+            }];}else{
                model.text = message.text;
                [self reloadTableView];
-            }];
-            NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
-            NSDate *time = [NSDate dateWithTimeIntervalSince1970:message.timestamp];
-            [dateFormatter setDateFormat:@"HH:mm"];
-            model.time = [dateFormatter stringFromDate:time];
-            model.messageType = NIMMessageTypeText;
-            model.myOrOther = @"other";
-            [_dataSource addObject:model];
+            }
+            
             
 //            [self reloadTableView];
 //            [self.tableView reloadData];
